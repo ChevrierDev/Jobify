@@ -46,7 +46,7 @@ const offerValidationRule = () => {
 
     body("diplome_requis").isString().trim().escape(),
 
-    body("competences").isArray(),
+    body("competences").isString().trim().escape(),
   ];
 };
 

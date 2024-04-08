@@ -15,6 +15,6 @@ offersRoute.get("/", getOffers);
 offersRoute.get("/:offerID", getOfferByID);
 offersRoute.post("/", offerValidationRule(), validate, postNewOffer);
 offersRoute.delete("/", deleteOffer);
-offersRoute.patch("/", updateOffer);
+offersRoute.patch("/",offerValidationRule(),validate, updateOffer);
 
 module.exports = offersRoute;
