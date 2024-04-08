@@ -2,8 +2,6 @@ const { query } = require("express");
 const { Pool } = require("pg");
 require("dotenv").config();
 
-console.log(process.env.DB_PASSWORD);
-
 const pool = new Pool({
   user: "postgres",
   password: process.env.DB_PASSWORD,

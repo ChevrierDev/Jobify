@@ -1,10 +1,25 @@
 const db = require("../config/db");
 
 //get all offer from DB
-async function getOffer(req, res) {
+async function getOffers(req, res) {
   try {
     const results = await db.query("SELECT * FROM offres");
     res.json(results.rows);
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Internal server error !");
+  }
+}
+
+//get offer by it's ID
+async function getOfferByID(req, res) {
+  try {
+    const id = req.params.offerID;
+    const results = await db.query(`SELECT * FROM offres WHERE id = ${id}`);
+    if (results.rows.length === 0) {
+        res.status(404).send("No offer found with the provided ID");
+    }
+    res.status(200).json(results.rows[0]);
   } catch (err) {
     console.log(err);
     res.status(500).send("Internal server error !");
@@ -129,7 +144,8 @@ async function updateOffer(req, res) {
 }
 
 module.exports = {
-  getOffer,
+  getOffers,
+  getOfferByID,
   postNewOffer,
   deleteOffer,
   updateOffer,

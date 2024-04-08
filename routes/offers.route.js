@@ -1,6 +1,7 @@
 const express = require("express");
 const {
-  getOffer,
+  getOffers,
+  getOfferByID,
   postNewOffer,
   deleteOffer,
   updateOffer,
@@ -8,7 +9,8 @@ const {
 
 const offersRoute = express.Router();
 
-offersRoute.get("/", getOffer);
+offersRoute.get("/", getOffers);
+offersRoute.get("/:offerID", getOfferByID);
 offersRoute.post("/", postNewOffer);
 offersRoute.delete("/", deleteOffer);
 offersRoute.patch("/", updateOffer);
