@@ -17,7 +17,7 @@ async function getOfferByID(req, res) {
     const id = req.params.offerID;
     const results = await db.query(`SELECT * FROM offres WHERE id = ${id}`);
     if (results.rows.length === 0) {
-        res.status(404).send("No offer found with the provided ID");
+      res.status(404).send("No offer found with the provided ID");
     }
     res.status(200).json(results.rows[0]);
   } catch (err) {
