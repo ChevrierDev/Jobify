@@ -1,4 +1,64 @@
 const db = require("../config/db");
+const {
+  body,
+  validationResult,
+  customSanitizer,
+} = require("express-validator");
+
+//define security Rule for my app
+const offerValidationRule = () => {
+  return [
+    body("titre")
+      .notEmpty()
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/[-_\s]/g, "_")),
+
+    body("description")
+      .notEmpty()
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
+
+    body("entreprise")
+      .notEmpty()
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/[-_\s]/g, "_")),
+
+    body("lieu")
+      .notEmpty()
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/[-_\s]/g, "_")),
+
+    body("date_limite").notEmpty().isISO8601(),
+
+    body("type_contrat").notEmpty().isString().trim().escape(),
+
+    body("salaire").isNumeric(),
+
+    body("experience").isString().trim().escape(),
+
+    body("diplome_requis").isString().trim().escape(),
+
+    body("competences").isArray(),
+  ];
+};
+
+//handle validation error middleware
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    return next();
+  } else {
+    return res.status(400).json({ errors: errors.array() });
+  }
+};
 
 //get all offer from DB
 async function getOffers(req, res) {
@@ -149,4 +209,6 @@ module.exports = {
   postNewOffer,
   deleteOffer,
   updateOffer,
+  offerValidationRule,
+  validate,
 };
