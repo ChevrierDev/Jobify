@@ -5,18 +5,24 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start": "nodemon server.js",
+    "build": "tailwindcss build -i ./views/public/css/input.css -o ./views/public/css/output.css",
+    "watch": "tailwindcss build -i ./views/public/css/input.css -o ./views/public/css/output.css --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
     "express": "^4.19.2",
     "express-validator": "^7.0.1",
     "knex": "^3.1.0",
     "morgan": "^1.10.0",
     "nodemon": "^3.1.0",
     "pg": "^8.11.5"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
   }
 }
