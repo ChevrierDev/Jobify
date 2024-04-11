@@ -9,8 +9,8 @@ const PORT = process.env.PORT;
 const server = http.createServer(app);
 
 
-app.get('/', (req, res) => {
-  res.render('pages/index')
+app.get('/home', (req, res) => {
+  res.render('layouts/index')
 })
 
 app.use("/offers", offersRoute);
