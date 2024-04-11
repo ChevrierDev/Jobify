@@ -1,17 +1,110 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobify</title>
     <link rel="stylesheet" href="../public/css/output.css">
     <link rel="stylesheet"  href="../public/css/style.css">
+    <script defer src="../public/data.js"></script>
 </head>
 <body class="min-h-screen">
+    <!-- Header section -->
     <%- include('../components/header') %>
 
-   
-  
+    <!-- search job input content -->
+    <%- include('../components/input_search') %>
+
+    <!-- hero offers content section -->
+    <main class="flex mt-16 gap-x-5 " id="hero">
+        <!-- checkbox filter section -->           
+        <div class="container h-[500px] w-[30%] mx-auto ml-40 ">
+
+            <p class="text-gray-800 font-normal text-lg w-full flex-wrap pl-1">Filtres</p>
+            
+            <div class="container flex flex-col flex-wrap min-h-[90%] border-[1px] border-gray-500/30 items-center space-y-4 py-5 pb-4 rounded-sm ">
+
+                <div class="container flex flex-col px-4 border-b border-gray-500/30 max-w-[95%] pb-4">
+                    <p class="text-gray-800/65 font-medium text-lg pb-3">Type d'emploi</p>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">CDI (45)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">CDD (45)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Stage (45)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Alternance (45)</p>
+                    </div>
+                </div>
+
+                <div class="container flex flex-col px-4 border-b border-gray-500/30 max-w-[95%] pb-4">
+                    <p class="text-gray-800/65 font-medium text-lg pb-3">Salary</p>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-salary" id="offers-salary" class="w-4 h-4"><p class="flex  mb-1">20k€ - 40k€ (3)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-salary" id="offers-salary" class="w-4 h-4"><p class="flex  mb-1">40k€- 60k€ (21)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-salary" id="offers-salary" class="w-4 h-4"><p class="flex  mb-1">60k€- 80k€ (18)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-salary" id="offers-salary" class="w-4 h-4"><p class="flex  mb-1">80k€ - 100k€ (3)</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-salary" id="offers-salary" class="w-4 h-4"><p class="flex  mb-1">Selon profil (51)</p>
+                    </div>
+                </div>
+
+                <div class="container flex flex-col px-4  max-w-[95%] pb-4">
+                    <p class="text-gray-800/65 font-medium text-lg pb-3">Niveau d'étude</p>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Niveau Master</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Niveau Licence</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Niveau Bac +2</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Niveau Doctorat</p>
+                    </div>
+                    <div class="flex space-x-5">
+                        <input type="checkbox" name="offers-type" id="offers-type" class="w-4 h-4"><p class="flex  mb-1">Niveau Bac</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+            <!-- offers content card -->
+            <div class="container  max-h-[800px] w-[40%] mx-auto mr-80 flex flex-col overflow-scroll overflow-x-hidden gap-y-5 " id="cards">
+                <% offers.forEach(offer => { %>
+                    <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+                        <a href="#">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= offer.titre %></h5>
+                        </a>
+                        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"><%= offer.description %></p>
+                        <a href="./offer.ejs" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:hover:scale-105 duration-200 ease-in">
+                            Voir l'offre
+                            <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                            </svg>
+                        </a>
+                      </div>
+                <% }); %>
+            </div>
+    </main>
+
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+    
+ 
+    
 
 </body>
 </html>

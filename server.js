@@ -1,4 +1,5 @@
 const offersRoute = require("./routes/offers.route");
+const homeRouter = require('./routes/home.route')
 const http = require("http");
 require("dotenv").config();
 
@@ -8,11 +9,7 @@ const PORT = process.env.PORT;
 
 const server = http.createServer(app);
 
-
-app.get('/home', (req, res) => {
-  res.render('layouts/index')
-})
-
+app.use('/home', homeRouter); 
 app.use("/offers", offersRoute);
 
 server.listen(PORT, () => {

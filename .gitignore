@@ -9,6 +9,7 @@
 # production
 /build
 /tuto_video
+/data.js
 
 # misc
 .DS_Store
