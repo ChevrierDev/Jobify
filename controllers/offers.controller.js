@@ -64,10 +64,15 @@ const validate = (req, res, next) => {
 async function getOffers(req, res) {
   try {
     const results = await db.query("SELECT * FROM offres");
-    res.json(results.rows);
+    if (results.rows.length === 0) {
+      res.status(404).json({ error: "No offer found in our service" });
+      return;
+    }else{
+     return res.json(results.rows);
+    }
   } catch (err) {
     console.log(err);
-    res.status(500).send("Internal server error !");
+    res.status(500).json({ error: "Internal server error!" });
   }
 }
 

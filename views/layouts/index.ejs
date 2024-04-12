@@ -83,8 +83,14 @@
 
             <!-- offers content card -->
             <div class="container  max-h-[800px] w-[40%] mx-auto mr-80 flex flex-col overflow-scroll overflow-x-hidden gap-y-5 " id="cards">
+                <% if (offers.error) { %>
+                    <div class="flex flex-col max-w-full min-h-full item-center justify-center outline-dashed pb-10">
+                        <p class="max-w-full text-center font-bold texl-xl">Aucune offre n'est disponible sur notre plateforme pour le moment...</p>
+                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:h-12 md:hover:scale-105 duration-150 ease-in-out flex items-center justify-center max-w-[50%] mx-auto mt-8"><a href="#hero" >Postez une offre +</a></A></button>
+                    </div>
+                <% }else { %>
                 <% offers.forEach(offer => { %>
-                    <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
+                    <div class="max-w-full p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                         <a href="#">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white"><%= offer.titre %></h5>
                         </a>
@@ -96,7 +102,7 @@
                             </svg>
                         </a>
                       </div>
-                <% }); %>
+                <% }); }%>
             </div>
     </main>
 
