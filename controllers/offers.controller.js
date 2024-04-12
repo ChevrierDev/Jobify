@@ -1,4 +1,5 @@
 const db = require("../config/db");
+const he = require('he')
 
 const {
   body,
@@ -14,7 +15,7 @@ const offerValidationRule = () => {
       .isString()
       .trim()
       .escape()
-      .customSanitizer((value) => value.replace(/[-_\s]/g, "_")),
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
     body("description")
       .notEmpty()
@@ -28,26 +29,26 @@ const offerValidationRule = () => {
       .isString()
       .trim()
       .escape()
-      .customSanitizer((value) => value.replace(/[-_\s]/g, "_")),
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
     body("lieu")
       .notEmpty()
       .isString()
       .trim()
       .escape()
-      .customSanitizer((value) => value.replace(/[-_\s]/g, "_")),
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
     body("date_limite").notEmpty().isISO8601(),
 
-    body("type_contrat").notEmpty().isString().trim().escape(),
+    body("type_contrat").notEmpty().isString().trim().escape().customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
     body("salaire").isNumeric(),
 
-    body("experience").isString().trim().escape(),
+    body("experience").isString().trim().escape().customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
-    body("diplome_requis").isString().trim().escape(),
+    body("diplome_requis").isString().trim().escape().customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
-    body("competences").isString().trim().escape(),
+    body("competences").isArray().trim().escape(),
   ];
 };
 
@@ -116,7 +117,7 @@ async function postNewOffer(req, res) {
         diplome_requis,
         competences,
       } = req.body;
-
+      
       const newPost = await db.query(
         "INSERT INTO public.offres(titre, description, entreprise, lieu, date_publication, date_limite, type_contrat, salaire, experience, diplome_requis, competences, created_at, updated_at) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5::DATE, $6, $7, $8, $9, $10, NOW(), NOW())",
         [
@@ -132,7 +133,7 @@ async function postNewOffer(req, res) {
           competences,
         ]
       );
-
+      
       res.status(200).send("offer add with success").json(newPost.rows[0]);
     }
   } catch (err) {
