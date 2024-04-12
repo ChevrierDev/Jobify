@@ -608,6 +608,14 @@ video {
   position: relative;
 }
 
+.bottom-0 {
+  bottom: 0px;
+}
+
+.top-0 {
+  top: 0px;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -692,6 +700,10 @@ video {
 
 .mt-40 {
   margin-top: 10rem;
+}
+
+.mt-72 {
+  margin-top: 18rem;
 }
 
 .block {
