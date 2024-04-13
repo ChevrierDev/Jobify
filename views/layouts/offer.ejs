@@ -3,12 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobify footer</title>
+    <title>Jobify offer</title>
     <link rel="stylesheet" href="../public/css/output.css">
     <link rel="stylesheet"  href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!-- offer header -->
+    <%- include('../components/offer_header') %>
 
+    <main>
+        <!-- offer description content -->
+        <section class="flex flex-col flex-wrap  max-w-[70%] mx-auto mt-4 ">
+            <div class="flex items-start  space-x-2 justify-start max-w-full  border-b border-gray-300/40 pb-2 ">
+                <a href="/home" class="text-blue-800 hover:text-blue-800 duration-150 ease-in-out">liste des offres</a>
+                <i class="fa-solid fa-chevron-right pt-1.5"></i>
+                <p class="text-gray-600/85">Détails des postes</p>
+            </div>
+            <div class="container flex ">
+                <div class="flex flex-col item-start justify-start border-r  border-gray-300/40 min-h-screen min-w-[70%] p-7 space-y-2">
+                    <h1 class="font-medium text-xl tracking-wide">Description du poste</h1>
+                    <p class="font-normal text-lg tracking-wide">Description détailler de l'offre</p>
+                    <h1 class="fontbold text-xl">titre competence</h1>
+                    <ul>
+                        <li>compétence</li>
+                        <li>compétence</li>
+                        <li>compétence</li>
+                        <li>compétence</li>
+                    </ul>
+                    <h1 class="fontbold text-xl">informations contrat</h1>
+                    <p>informations contrat</p>
+                    <p>informations contrat</p>
+                    <p>informations contrat</p>
+                    <p>informations contrat</p>
+    
+                </div>
+
+                <div class="flex flex-col item-start justify-start   border-gray-300/40 min-h-screen min-w-[30%] p-7">
+                    <h1 class="fontbold text-xl">information sur poste et employeur</h1>
+                    <p>info</p>
+                    <p>info</p>
+                    <p>info</p>
+                    <p>info</p>
+                    <p>info</p>
+                    <p>info</p>
+                    <p>info</p>
+                    <p>info</p>
+                </div>
+            </div>
+        </section>
+    </main>
 
 
 </body>
