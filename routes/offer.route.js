@@ -1,8 +1,8 @@
-const express = require('express');
-const renderOffer = require('../controllers/offer.controller')
+const express = require("express");
+const renderOfferById = require("../controllers/offer.controller");
 
 const offerRoute = express.Router();
 
-offerRoute.get('/', renderOffer);
+offerRoute.get("/:id", renderOfferById);
 
-module.exports = offerRoute
+module.exports = offerRoute;
