@@ -3,13 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jobify footer</title>
+    <title>Jobify offer</title>
     <link rel="stylesheet" href="../public/css/output.css">
     <link rel="stylesheet"  href="../public/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script defer src="../public/"></script>
 </head>
 <body>
+    <!-- offer header -->
+    <%- include('../components/offer_header') %>
 
+    <main class="mt-10">
+        <!-- offer description content -->
+        <section class="flex flex-col flex-wrap  max-w-[70%] mx-auto mt-4 ">
+            <div class="flex items-start  space-x-2 justify-start max-w-full  border-b border-gray-300/40 pb-2 ">
+                <a href="/home" class="text-blue-800 hover:text-blue-800 duration-150 ease-in-out">liste des offres</a>
+                <i class="fa-solid fa-chevron-right pt-1.5"></i>
+                <p class="text-gray-600/85">Détails des postes</p>
+            </div>
+            <div class="container flex">
+                <div class="flex flex-col item-start justify-start border-r  border-gray-300/40 min-h-screen min-w-[70%] p-7 gap-y-5">
+                    <div class="space-y-2">
+                        <h1 class="font-medium text-xl tracking-wide">description du poste</h1>
+                        <ul class="list-inside list-disc">
+                            <li><span class="font-bold text-base text-gray-800/80">Rémunération:</span><span class="font-light tracking-wide"> <%= offer.salaire %> € net</span></li>
+                            <li><span class="font-bold text-base text-gray-800/80">Type de contrat:</span><span class="font-light tracking-wide"> <%= offer.type_contrat %></span></li>
+                        </ul>
+                    </div>
+                    <div class="space-y-2">
+                        <h1 class="font-semibold text-xl tracking-wide text-black">La societer</h1>
+                        <p class="font-medium text-base leading-6 text-wrap text-left tracking-normal text-black/70"><%= offer.description %></p>
+                    </div>
+                    
+                    <div class="space-y-2">
+                        <h1 class="font-semibold text-xl tracking-wide text-black">Profil</h1>
+                        <p class="font-medium text-base leading-6 text-wrap text-left tracking-normal text-black/70"><%= offer.competences %></p>
 
+                    </div>
+                    
+                    
+
+                    <div class="flex justify-center items-center mt-8">
+                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:h-12 md:hover:scale-105 duration-150 ease-in-out flex items-center justify-center mt-5 max-w-[80%]"><a href="#hero" >Je suis intéressé</a></A></button>
+                    </div>
+
+                    
+                    
+                    
+                    
+                  
+    
+                </div>
+
+                <div class="flex flex-col item-start justify-start   border-gray-300/40 min-h-screen min-w-[30%] p-7 space-y-2">
+                    <h1 class="font-semibold text-xl max-w-full">information sur le poste</h1>
+                    <div>
+                        <p class="text-gray-700 font-normal">ID de l'offre</p>
+                        <p class="text-black/90 font-normal"><%= offer.id %></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">Nom de l'entreprise</p>
+                        <a href="">
+                            <p class="text-black/90 font-normal"><%= offer.entreprise %></p>
+                        </a>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">ID de l'employeur</p>
+                        <p class="text-black/90 font-normal">Unknow</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">Diplome</p>
+                        <p class="text-black/90 font-normal"><%= offer.diplome_requis %></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">expérience requis</p>
+                        <p class="text-black/90 font-normal"><%= offer.experience %></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">localisation</p>
+                        <p class="text-black/90 font-normal"><%= offer.lieu %></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">salaire</p>
+                        <p class="text-black/90 font-normal"><%= offer.salaire %> € net</p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">date de publication</p>
+                        <% const datePublication = new Date(offer.date_publication); %>
+                        <p class="text-black/90 font-normal"><%= datePublication.toLocaleDateString('fr-FR') %></p>
+                    </div>
+                    <div>
+                        <p class="text-gray-700 font-normal">date limite</p>
+                        <% const dateLimite = new Date(offer.date_limite); %>
+                        <p class="text-black/90 font-normal"><%= dateLimite.toLocaleDateString('fr-FR') %></p>
+                    </div>
+                    
+              
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- footer section -->
+    <%- include('../components/footer') %>
 
 </body>
 </html>

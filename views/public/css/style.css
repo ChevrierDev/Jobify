@@ -4,6 +4,13 @@
     background-size: cover;
 }
 
+.nav-bar-offer{
+    background-image: url('../images/jacek-dylag-PMxT0XtQ--A-unsplash.jpg');
+    background-position: top;
+    background-repeat: no-repeat;
+    
+}
+
 .truncate-lines-3 {
     display: -webkit-box;
     -webkit-box-orient: vertical;
