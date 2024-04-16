@@ -68,7 +68,8 @@
       <div class="container z-10 flex flex-col flex-wrap min-h-[400px] items-center justify-center order-3 space-y-5">
         <h1 class="text-2xl text-white font-medium text-center flex-shrink"><%= offer.type_contrat %></h1>
         <h1 class="text-5xl text-white font-medium max-w-5xl text-center flex-shrink"><%= offer.titre %></h1>
-        <h1 class="text-2xl text-white font-light max-w-5xl text-center flex-shrink">lieu et date de publication</h1>
+        <% const datePublication = new Date(offer.date_publication); %>
+        <h1 class="text-2xl text-white font-light max-w-5xl text-center flex-shrink"><%= offer.lieu %>, poster le <%= datePublication.toLocaleDateString('fr-FR') %> </h1>
           <!-- Primary Action Button -->
           <div class="flex gap-x-4 mx-auto max-w-full items-center justify-center pt-5">
             <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 md:h-12 md:hover:scale-105 duration-150 ease-in-out flex items-center justify-center"><a href="#hero" >Je postule</a></A></button>

@@ -1,5 +1,5 @@
 const db = require("../config/db");
-const he = require('he')
+const he = require("he");
 
 const {
   body,
@@ -40,15 +40,28 @@ const offerValidationRule = () => {
 
     body("date_limite").notEmpty().isISO8601(),
 
-    body("type_contrat").notEmpty().isString().trim().escape().customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
+    body("type_contrat")
+      .notEmpty()
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
     body("salaire").isNumeric(),
 
-    body("experience").isString().trim().escape().customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
+    body("experience")
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
-    body("diplome_requis").isString().trim().escape().customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
+    body("diplome_requis")
+      .isString()
+      .trim()
+      .escape()
+      .customSanitizer((value) => value.replace(/<\/?[^>]+(>|$)/g, "")),
 
-    body("competences").isArray().trim().escape(),
+    body("competences").isString().trim().escape(),
   ];
 };
 
@@ -80,7 +93,7 @@ async function getOffers(req, res) {
     console.log(err);
     res.status(500).json({ error: "Internal server error!" });
   }
-};
+}
 
 //get offer by it's ID
 async function getOfferByID(req, res) {
@@ -97,7 +110,7 @@ async function getOfferByID(req, res) {
     console.log(err);
     res.status(500).send("Internal server error !");
   }
-};
+}
 
 //Post new offer to DB
 async function postNewOffer(req, res) {
@@ -117,7 +130,7 @@ async function postNewOffer(req, res) {
         diplome_requis,
         competences,
       } = req.body;
-      
+
       const newPost = await db.query(
         "INSERT INTO public.offres(titre, description, entreprise, lieu, date_publication, date_limite, type_contrat, salaire, experience, diplome_requis, competences, created_at, updated_at) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5::DATE, $6, $7, $8, $9, $10, NOW(), NOW())",
         [
@@ -133,14 +146,14 @@ async function postNewOffer(req, res) {
           competences,
         ]
       );
-      
+
       res.status(200).send("offer add with success").json(newPost.rows[0]);
     }
   } catch (err) {
     console.log(err);
     res.status(500).send("internal server error");
   }
-};
+}
 
 //Delete offer from DB by is ID
 async function deleteOffer(req, res) {
@@ -168,7 +181,7 @@ async function deleteOffer(req, res) {
     console.log(err);
     res.status(500).send("Error happen cannot delete current offer");
   }
-};
+}
 
 //Update offer from DB by is ID
 async function updateOffer(req, res) {
@@ -220,7 +233,7 @@ async function updateOffer(req, res) {
     console.log(err);
     res.status(500).send("Internal server Error Update offer is not possible");
   }
-};
+}
 
 module.exports = {
   getOffers,
