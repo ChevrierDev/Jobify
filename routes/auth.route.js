@@ -2,9 +2,13 @@ const express = require('express');
 
 
 const authRoute = express.Router();
-const getAuth = require('../controllers/auth.controller')
+const {
+    getAuth,
+    recruterGetAuth,
+}= require('../controllers/auth.controller')
 
-authRoute.get('/', getAuth)
+authRoute.get('/', getAuth);
+authRoute.get('/recruter',  recruterGetAuth);
 
 
 module.exports = authRoute;

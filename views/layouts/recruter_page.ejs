@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobify</title>
+    <link rel="stylesheet" href="../public/css/output.css">
+    <link rel="stylesheet"  href="../public/css/style.css">
+    <script defer src="../public/data.js"></script>
+</head>
+<body class="min-h-screen">
+    <!-- Header section -->
+    <%- include('../components/recruter_header') %>
+
+    <!-- hero offers content section -->
+    <main class="min-h-[100vh] flex flex-col items-center">
+        <section class="flex flex-col mt-40">
+            <div class="container">
+                <h1 class="font-medium text-5xl text-black">
+                    Vous cherchez de nouveau talent ? 
+                </h1>
+            </div>
+            <div class="container flex flex-col flex-wrap items-center mt-10">
+                <!-- Post new offer button -->
+                <a href="" class="font-bold text-lg text-white">
+                    <button class="bg-blue-800 w-[20vw] h-16 rounded-lg hover:bg-blue-900 duration-500 ease-in-out">
+                        Publier une offre d'emplois
+                    </button>
+                </a>
+            </div>
+        </section>
+
+        <!-- instruction section -->
+        <section class="flex gap-x-10 mt-20">
+            <div class="container flex flex-col items-start justify-center p-5 space-y-7 border border-gray-400/45 max-w-[25vw] min-h-[45vh] rounded-xl text-wrap">
+                <p class="text-blue-900 text-xl font-bold pb-5">1</p>
+                <h1 class="font-bold text-2xl text-gray-900">Inscrivez-vous gratuitement</h1>
+                <p class="text-gray-900 text-lg font-light">Tout ce qu'il vous faut pour créer un compte et publier votre offre d'emploi, c'est une adresse email.</p>
+            </div>
+
+            <div class="container flex flex-col items-start justify-center p-5 space-y-7 border border-gray-400/45 max-w-[25vw] min-h-[45vh] rounded-xl text-wrap">
+                <p class="text-blue-900 text-xl font-bold pb-5">2</p>
+                <h1 class="font-bold text-2xl text-gray-900">Créez votre offre d'emploi</h1>
+                <p class="text-gray-900 text-lg font-light">Donnez-lui un titre et une description, puis indiquez où vous recrutez : votre annonce est prête.</p>
+            </div>
+
+            <div class="container flex flex-col items-start justify-center p-5 space-y-7 border border-gray-400/45 max-w-[25vw] min-h-[45vh] rounded-xl text-wrap">
+                <p class="text-blue-900 text-xl font-bold pb-5">3</p>
+                <h1 class="font-bold text-2xl text-gray-900">Publiez votre offre</h1>
+                <p class="text-gray-900 text-lg font-light">Après avoir publié votre offre d'emploi, utilisez nos outils de pointe pour dénicher le talent idéal.</p>
+            </div>
+        </section>
+    </main>
+    
+    <!-- footer section -->
+    <%- include('../components/footer') %>
+    
+ 
+    
+
+</body>
+</html>
