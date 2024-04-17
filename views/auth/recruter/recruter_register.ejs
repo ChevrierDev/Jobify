@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <!-- Charset and viewport definition -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
+    <title>Jobify</title>
+    <!-- Stylesheet links -->
+    <link rel="stylesheet" href="../../public/css/output.css">
+    <link rel="stylesheet"  href="../../public/css/style.css">
+</head>
+<body class="min-h-screen bg-black">
+  
+    <!-- Login form section -->
+    <main class="min-h-screen flex flex-col  p-20">
+    
+        <div class="w-[30rem] max-w-xl mx-auto  bg-white dark:bg-gray-800 rounded-lg shadow-md px-8 py-10 flex flex-col items-center">
+            <!-- Logo and Brand Name -->
+          <div class="flex flex-col pl-5 mb-4  w-fit">
+                <a href="http://127.0.0.1:3000/home#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="../../public/images/logo-transparent-png.png" class="h-14" alt="jobify Logo" />
+                </a>
+                <p class="text-xs font-light text-black ml-4">jobify for recruter</p>
+          </div>
+
+            <!-- Form title -->
+            <h1 class="text-xl font-bold text-center text-gray-700 dark:text-gray-200 mb-8">Bienvenue chez Jobify</h1>
+            <!-- Form -->
+            <form action="#" class="w-full flex flex-col gap-4">
+                <!-- First name field -->
+                <div class="flex items-start flex-col justify-start">
+                <label for="entrepriseName" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Nom de l'entreprise: *</label>
+                <input type="text" id="entrepriseName" name="entrepriseName" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- siret number field -->
+                <div class="flex items-start flex-col justify-start">
+                    <label for="siretNumber" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Numero de siret: *</label>
+                    <input type="text" id="siretNumber" name="siretNumber" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- Phone number field -->
+                <div class="flex items-start flex-col justify-start">
+                    <label for="phoneNumber" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Numero de telephone: *</label>
+                    <input type="text" id="phoneNumber" name="phoneNumber" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                   <!-- Phone number field -->
+                   <div class="flex items-start flex-col justify-start">
+                    <label for="adresse" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Adresse: </label>
+                    <input type="text" id="adresse" name="adresse" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+
+                <!-- Username field -->
+                <div class="flex items-start flex-col justify-start">
+                <label for="username" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Username:</label>
+                <input type="text" id="username" name="username" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <!-- Email field -->
+                <div class="flex items-start flex-col justify-start">
+                <label for="email" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Email: *</label>
+                <input type="email" id="email" name="email" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- Password field -->
+                <div class="flex items-start flex-col justify-start">
+                <label for="password" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Password: *</label>
+                <input type="password" id="password" name="password" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- Confirm password field -->
+                <div class="flex items-start flex-col justify-start">
+                <label for="confirmPassword" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Confirm Password: *</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- Register button -->
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md shadow-sm">Register</button>
+            </form>
+
+            <!-- Login link -->
+            <div class="mt-4 text-center">
+                <span class="text-sm text-gray-500 dark:text-gray-300">Already have an account? </span>
+                <a href="http://127.0.0.1:3000/login/recruter" class="text-blue-500 hover:text-blue-600">Login</a>
+            </div>
+        </div>
+
+     </main>
+
+     <!-- footer section -->
+     <footer class="bg-white rounded-t-sm shadow dark:bg-gray-900  w-full mt-28">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8 h-full">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="http://127.0.0.1:3000/home#" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="../../public/images/logo-transparent-png.png" class="h-16" alt="Jobify Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Jobify</span>
+                </a>
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="http://127.0.0.1:3000/home#" class="hover:underline">Jobify</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    
+</body>
+</html>
