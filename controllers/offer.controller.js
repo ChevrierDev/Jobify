@@ -18,9 +18,12 @@ async function fetchofferData(req, res) {
     const offerId = req.params.id;
     const results = await fetch(`http://127.0.0.1:3000/offers/${offerId}`);
     const data = await results.json();
-
+    
+    const decodedOffer = decodeData(data);
+    
     res.status(200).render("layouts/offer", {
-      offer: decodeData(data),
+      offer: decodedOffer,
+      title: decodedOffer.titre
     });
   } catch (err) {
     console.log(err);
