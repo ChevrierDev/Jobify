@@ -6,6 +6,7 @@ const {
     userGetAuth,
     recruterGetRegister,
     recruterGetAuth,
+    postNewRecruterAuth,
 }= require('../controllers/auth.controller')
 
 //User Auth routes
@@ -14,6 +15,7 @@ authRoute.get('/', userGetAuth);
 //Recruter Auth routes
 authRoute.get('/recruter',  recruterGetAuth);
 authRoute.get('/recruter/register',  recruterGetRegister);
+authRoute.post('/recruter/register', postNewRecruterAuth)
 
 //Admin Auth routes
 
