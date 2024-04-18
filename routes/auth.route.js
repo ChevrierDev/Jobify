@@ -7,6 +7,8 @@ const {
     recruterGetRegister,
     recruterGetAuth,
     postNewRecruterAuth,
+    validate,
+    recruterAuthValidationRule
 }= require('../controllers/auth.controller')
 
 //User Auth routes
@@ -15,7 +17,7 @@ authRoute.get('/', userGetAuth);
 //Recruter Auth routes
 authRoute.get('/recruter',  recruterGetAuth);
 authRoute.get('/recruter/register',  recruterGetRegister);
-authRoute.post('/recruter/register', postNewRecruterAuth)
+authRoute.post('/recruter/register',recruterAuthValidationRule(), validate, postNewRecruterAuth)
 
 //Admin Auth routes
 

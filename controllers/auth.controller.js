@@ -17,19 +17,32 @@ const recruterAuthValidationRule = () => {
   ];
 };
 
+//handle validation error middleware
+const validate = (req, res, next) => {
+  const errors = validationResult(req);
+  if (errors.isEmpty()) {
+    return next();
+  } else {
+    return res.status(400).json({
+      errors: errors.array({
+        onlyFirstError: true,
+      }),
+    });
+  }
+};
+
 //hash password function
 async function cryptPassword(password) {
-    const saltRounds = 10;
-  
-    try {
-      const hash = await bCrypt.hash(password, saltRounds);
-      return hash;
-    } catch (error) {
-      console.error("Error while hashing password:", error.message);
-      throw error;
-    }
+  const saltRounds = 10;
+
+  try {
+    const hash = await bCrypt.hash(password, saltRounds);
+    return hash;
+  } catch (error) {
+    console.error("Error while hashing password:", error.message);
+    throw error;
   }
-  
+}
 
 //User Authentification
 async function userGetAuth(req, res) {
@@ -60,10 +73,9 @@ async function postNewRecruterAuth(req, res) {
     const hashedPassword = await cryptPassword(mot_de_passe);
 
     const newRecruter = await db.query(
-        "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE)",
-        [nom_entreprise, email, hashedPassword]
-      );
-      
+      "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE)",
+      [nom_entreprise, email, hashedPassword]
+    );
 
     res
       .status(200)
@@ -80,4 +92,6 @@ module.exports = {
   recruterGetAuth,
   recruterGetRegister,
   postNewRecruterAuth,
+  recruterAuthValidationRule,
+  validate,
 };
