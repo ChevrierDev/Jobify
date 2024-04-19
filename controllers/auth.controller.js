@@ -1,6 +1,4 @@
-const passport = require("passport");
 const bCrypt = require("bcrypt");
-const localStrategy = require("passport-local");
 const db = require("../config/db");
 
 const { body, validationResult } = require("express-validator");
@@ -11,8 +9,7 @@ const recruterAuthValidationRule = () => {
     body("nom_entreprise")
       .notEmpty()
       .withMessage("You must enter a name for your companies")
-      .isString()
-      .trim(),
+      .isString(),
     body("email")
       .notEmpty()
       .isEmail()
@@ -28,16 +25,18 @@ const recruterAuthValidationRule = () => {
           throw new Error("This email address is already registered.");
         }
       })
-      .withMessage("User already exist"),
+      .withMessage("User with this adress already exist"),
     body("mot_de_passe")
       .notEmpty()
       .withMessage("You must enter a Password")
       .isString()
       .trim()
       .isLength({ min: 10, max: 40 })
-      .withMessage("Your Password need a minimum of 10 charaters")
+      .withMessage("Your Password need a minimums of 10 charaters")
       .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)
-      .withMessage("Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."),
+      .withMessage(
+        "Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."
+      ),
     body("confirm_pass")
       .notEmpty()
       .withMessage("You must confirm your password")
@@ -45,6 +44,33 @@ const recruterAuthValidationRule = () => {
         return value === req.body.mot_de_passe;
       })
       .withMessage("Passwords do not match"),
+    body("numero_siret")
+      .optional()
+      .notEmpty()
+      .isNumeric({ min: 14, max: 14 })
+      .withMessage("must contain 14 digits"),
+    body("numero_telephone")
+      .optional()
+      .notEmpty()
+      .isMobilePhone("fr-FR", { strictMode: true })
+      .withMessage("incorrect phone number"),
+    body("adresse").optional().notEmpty().isString(),
+    body("pseudonyme")
+      .optional()
+      .notEmpty()
+      .isString()
+      .isLength({ min: 8, max: 15 })
+      .custom(async (value) => {
+        const query =
+          "SELECT EXISTS (SELECT 1 FROM recruteur WHERE pseudonyme = $1) AS pseudonyme_exists";
+        const results = await db.query(query, [value]);
+        const { pseudonyme_exists } = results.rows[0];
+
+        if (pseudonyme_exists) {
+          throw new Error("This username already exists.");
+        }
+      })
+      .withMessage("username already exists"),
   ];
 };
 
@@ -54,8 +80,7 @@ const validate = (req, res, next) => {
   if (errors.isEmpty()) {
     return next();
   } else {
-    const extractedErrors = [];
-    errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
+    const extractedErrors = errors.array().map((err) => ({ [err.param]: err.msg }));
 
     return res.status(400).json({
       errors: extractedErrors,
@@ -92,12 +117,7 @@ async function postNewRecruterAuth(req, res) {
       [nom_entreprise, email, hashedPassword]
     );
 
-    console.log("New recruter:", newRecruter);
-
-    res
-      .status(200)
-      .send("New recruter added with succes !")
-      .json(newRecruter.rows[0]);
+    res.status(200).json(newRecruter.rows[0]);
   } catch (err) {
     console.log(err);
     res.status(400).send("Internal server error !");

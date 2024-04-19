@@ -1,4 +1,5 @@
 const express = require("express");
+const passport = require('passport')
 
 const authRoute = express.Router();
 const {
@@ -23,7 +24,7 @@ authRoute.get("/recruter", (req, res) => {
 authRoute.get("/recruter/register", (req, res) => {
   res.render("auth/recruter/recruter_register", {
     title: "Créer un compte recruteur",
-  });
+  })
 });
 
 authRoute.post(

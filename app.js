@@ -1,8 +1,14 @@
 const express = require('express');
 const logger = require('morgan');
+const helmet = require('helmet');
+const passport = require("passport");
+const localStrategy = require("passport-local");
+const session = require('express-session');
 const path = require('path');
 
 const app = express();
+
+app.use(helmet());
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }))
