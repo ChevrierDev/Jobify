@@ -3,10 +3,7 @@ const bCrypt = require("bcrypt");
 const localStrategy = require("passport-local");
 const db = require("../config/db");
 
-const {
-  body,
-  validationResult,
-} = require("express-validator");
+const { body, validationResult } = require("express-validator");
 
 //recruter Auhtentification Rule
 const recruterAuthValidationRule = () => {
@@ -48,27 +45,6 @@ async function cryptPassword(password) {
   }
 }
 
-//User Authentification
-async function userGetAuth(req, res) {
-  res.render("auth/login", {
-    title: "Connectez vous.",
-  });
-}
-
-//recruter render Authentification
-async function recruterGetAuth(req, res) {
-  res.render("auth/recruter/recruter_login", {
-    title: "Connectez vous en tant que recruteur.",
-  });
-}
-
-//render recruter page
-async function recruterGetRegister(req, res) {
-  res.render("auth/recruter/recruter_register", {
-    title: "Créer un compte recruteur",
-  });
-}
-
 //post new recruter
 async function postNewRecruterAuth(req, res) {
   try {
@@ -94,9 +70,6 @@ async function postNewRecruterAuth(req, res) {
 }
 
 module.exports = {
-  userGetAuth,
-  recruterGetAuth,
-  recruterGetRegister,
   postNewRecruterAuth,
   recruterAuthValidationRule,
   validate,
