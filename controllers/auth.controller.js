@@ -8,9 +8,34 @@ const { body, validationResult } = require("express-validator");
 //recruter Auhtentification Rule
 const recruterAuthValidationRule = () => {
   return [
-    body("nom_entreprise").notEmpty().isString().trim(),
-    body("email").notEmpty().isEmail().trim(),
-    body("mot_de_passe").notEmpty().isString().trim(),
+    body("nom_entreprise")
+      .notEmpty()
+      .withMessage("You must enter a name for your companies")
+      .isString()
+      .trim(),
+    body("email")
+      .notEmpty()
+      .isEmail()
+      .withMessage("This is not a valid email adress")
+      .trim()
+      .custom(async (value, { req }) => {
+        const query =
+          "SELECT EXISTS (SELECT 1 FROM recruteur WHERE email = $1) AS email_exists";
+        const result = await db.query(query, [value]);
+        const { email_exists } = result.rows[0];
+
+        if (email_exists) {
+          throw new Error("This email address is already registered.");
+        }
+      })
+      .withMessage("User already exist"),
+    body("mot_de_passe")
+      .notEmpty()
+      .withMessage("You must enter a Password")
+      .isString()
+      .trim()
+      .isLength({ min: 10, max: 40 })
+      .withMessage("Your Password need a minimum of 10 charaters"),
   ];
 };
 
@@ -20,10 +45,11 @@ const validate = (req, res, next) => {
   if (errors.isEmpty()) {
     return next();
   } else {
+    const extractedErrors = [];
+    errors.array().map((err) => extractedErrors.push({ [err.param]: err.msg }));
+
     return res.status(400).json({
-      errors: errors.array({
-        onlyFirstError: true,
-      }),
+      errors: extractedErrors,
     });
   }
 };
@@ -61,7 +87,7 @@ async function postNewRecruterAuth(req, res) {
 
     res
       .status(200)
-      .send("New recruter added with succes")
+      .send("New recruter added with succes !")
       .json(newRecruter.rows[0]);
   } catch (err) {
     console.log(err);

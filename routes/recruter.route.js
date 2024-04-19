@@ -5,7 +5,7 @@ recruterRoute.get('/', (req, res) => {
     res.render('layouts/recruter_page', {
         title: 'Jobify pour recruteur'
     });
-})
+});
 
 
 
