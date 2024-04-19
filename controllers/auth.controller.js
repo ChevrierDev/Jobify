@@ -6,7 +6,6 @@ const db = require("../config/db");
 const {
   body,
   validationResult,
-  customSanitizer,
 } = require("express-validator");
 
 //recruter Auhtentification Rule
@@ -75,11 +74,11 @@ async function postNewRecruterAuth(req, res) {
   try {
     const { nom_entreprise, email, mot_de_passe } = req.body;
 
-    console.log('Data received from form:', { nom_entreprise, email, mot_de_passe });
+    const hashedPassword = await cryptPassword(mot_de_passe);
 
     const newRecruter = await db.query(
       "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE)",
-      [nom_entreprise, email, mot_de_passe]
+      [nom_entreprise, email, hashedPassword]
     );
 
     console.log("New recruter:", newRecruter);

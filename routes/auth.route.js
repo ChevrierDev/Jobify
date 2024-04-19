@@ -17,7 +17,7 @@ authRoute.get('/', userGetAuth);
 //Recruter Auth routes
 authRoute.get('/recruter',  recruterGetAuth);
 authRoute.get('/recruter/register',  recruterGetRegister);
-authRoute.post('/recruter/register', postNewRecruterAuth)
+authRoute.post('/recruter/register',postNewRecruterAuth)
 
 //Admin Auth routes
 
