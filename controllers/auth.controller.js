@@ -2,6 +2,7 @@ const passport = require("passport");
 const bCrypt = require("bcrypt");
 const localStrategy = require("passport-local");
 const db = require("../config/db");
+
 const {
   body,
   validationResult,
@@ -35,8 +36,12 @@ const validate = (req, res, next) => {
 async function cryptPassword(password) {
   const saltRounds = 10;
 
+  if (!password) {
+    throw new Error("Password is required.");
+  }
   try {
     const hash = await bCrypt.hash(password, saltRounds);
+    console.log("hash:", hash);
     return hash;
   } catch (error) {
     console.error("Error while hashing password:", error.message);
@@ -72,10 +77,14 @@ async function postNewRecruterAuth(req, res) {
 
     const hashedPassword = await cryptPassword(mot_de_passe);
 
+    console.log("Hashed password:", hashedPassword);
+
     const newRecruter = await db.query(
       "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE)",
       [nom_entreprise, email, hashedPassword]
     );
+
+    console.log("New recruter:", newRecruter);
 
     res
       .status(200)
