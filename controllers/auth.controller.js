@@ -35,7 +35,16 @@ const recruterAuthValidationRule = () => {
       .isString()
       .trim()
       .isLength({ min: 10, max: 40 })
-      .withMessage("Your Password need a minimum of 10 charaters"),
+      .withMessage("Your Password need a minimum of 10 charaters")
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)
+      .withMessage("Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."),
+    body("confirm_pass")
+      .notEmpty()
+      .withMessage("You must confirm your password")
+      .custom((value, { req }) => {
+        return value === req.body.mot_de_passe;
+      })
+      .withMessage("Passwords do not match"),
   ];
 };
 
