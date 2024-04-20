@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+    require("dotenv").config();
+}
+
 const express = require("express");
 const db = require("./config/db");
 
@@ -13,11 +17,12 @@ const bcrypt = require("bcrypt");
 const logger = require("morgan");
 
 const app = express();
+app.use(express.urlencoded({ extended: false }));
 
 //initialise user session
 app.use(
   session({
-    secret: "secret",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
   })
@@ -53,7 +58,7 @@ const authUser = async (email, password, userType, done) => {
       return done(null, false, { message: "incorrect email adress" });
     }
 
-    const passwordMatched = await bcrypt.compare(user, user.passport);
+    const passwordMatched = await bcrypt.compare(password, user.passport);
     if (!passwordMatched) {
       return done(null, false, { message: "incorrect password" });
     }
@@ -66,9 +71,24 @@ const authUser = async (email, password, userType, done) => {
 
 passport.use(new LocalStrategy(authUser));
 
+passport.serializeUser( (user, done) => {
+    done(null, user)
+});
+
+passport.deserializeUser( (id, done) => {
+    done(null, id)
+});
+
+const checkAuthenticated = (req, res, next) => {
+    if (req.isAuthenticated()) {
+        return next()
+    }else{
+        res.redirect('login')
+    }
+}
+
 app.use(helmet());
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, "views")));
 app.use("views", express.static(path.join(__dirname, "views", "public")));
@@ -78,4 +98,4 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(logger("tiny"));
 
-module.exports = app;
+module.exports = { app, checkAuthenticated };

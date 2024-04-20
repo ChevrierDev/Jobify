@@ -21,6 +21,12 @@ authRoute.get("/recruter", (req, res) => {//recruter login
     title: "Connectez vous en tant que recruteur.",
   });
 });
+
+authRoute.post("/recruter", passport.authenticate('local', {
+  successRedirect: 'http://127.0.0.1:3000/recruter',
+  failureRedirect: 'http://127.0.0.1:3000/login/recruter'
+}) );
+
 authRoute.get("/recruter/register", (req, res) => {//recruter register
   res.render("auth/recruter/recruter_register", {
     title: "Créer un compte recruteur",
