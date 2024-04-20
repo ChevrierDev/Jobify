@@ -15,7 +15,7 @@ const recruterAuthValidationRule = () => {
       .isEmail()
       .withMessage("This is not a valid email adress")
       .trim()
-      .custom(async (value, { req }) => {
+      .custom(async (value, { req }) => {// custom validation that look if email already register in the DB
         const query =
           "SELECT EXISTS (SELECT 1 FROM recruteur WHERE email = $1) AS email_exists";
         const result = await db.query(query, [value]);
@@ -33,7 +33,7 @@ const recruterAuthValidationRule = () => {
       .trim()
       .isLength({ min: 10, max: 40 })
       .withMessage("Your Password need a minimums of 10 charaters")
-      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)//regex that fordify password
       .withMessage(
         "Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."
       ),
@@ -61,11 +61,11 @@ const recruterAuthValidationRule = () => {
       .withMessage("Pseudonyme is required")
       .isString()
       .withMessage("Pseudonyme must be a string")
-      .matches(/^\d.*\d$/)
+      .matches(/^\d.*\d$/)//Regex that force username to have at least one int
       .withMessage("Pseudonyme must contain at least one integer")
       .isLength({ min: 8, max: 15 })
       .withMessage("Pseudonyme must be between 8 and 15 characters long")
-      .custom(async (value) => {
+      .custom(async (value) => {// look if the username already exist in the database
         const query =
           "SELECT EXISTS (SELECT 1 FROM recruteur WHERE pseudonyme = $1) AS pseudonyme_exists";
         const results = await db.query(query, [value]);
@@ -145,9 +145,9 @@ async function postNewRecruterAuth(req, res) {
     );
 
     if (newRecruter.rows[0] === 0) {
-      res.status(404).send('You must enter your information');
+      res.status(404).send("You must enter your information");
       return;
-    };
+    }
 
     res.status(200).json(newRecruter.rows[0]);
   } catch (err) {

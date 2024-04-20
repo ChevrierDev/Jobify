@@ -15,13 +15,13 @@ authRoute.get("/", (req, res) => {
   });
 });
 
-//Recruter Auth routes
-authRoute.get("/recruter", (req, res) => {
+//Recruter Auth routes 
+authRoute.get("/recruter", (req, res) => {//recruter login
   res.render("auth/recruter/recruter_login", {
     title: "Connectez vous en tant que recruteur.",
   });
 });
-authRoute.get("/recruter/register", (req, res) => {
+authRoute.get("/recruter/register", (req, res) => {//recruter register
   res.render("auth/recruter/recruter_register", {
     title: "Créer un compte recruteur",
   })
