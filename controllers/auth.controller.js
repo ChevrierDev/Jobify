@@ -58,8 +58,13 @@ const recruterAuthValidationRule = () => {
     body("pseudonyme")
       .optional()
       .notEmpty()
+      .withMessage("Pseudonyme is required")
       .isString()
+      .withMessage("Pseudonyme must be a string")
+      .matches(/^\d.*\d$/)
+      .withMessage("Pseudonyme must contain at least one integer")
       .isLength({ min: 8, max: 15 })
+      .withMessage("Pseudonyme must be between 8 and 15 characters long")
       .custom(async (value) => {
         const query =
           "SELECT EXISTS (SELECT 1 FROM recruteur WHERE pseudonyme = $1) AS pseudonyme_exists";
@@ -70,7 +75,7 @@ const recruterAuthValidationRule = () => {
           throw new Error("This username already exists.");
         }
       })
-      .withMessage("username already exists"),
+      .withMessage("Username already exists"),
   ];
 };
 
@@ -80,9 +85,12 @@ const validate = (req, res, next) => {
   if (errors.isEmpty()) {
     return next();
   } else {
-    const extractedErrors = errors
-      .array()
-      .map((err) => ({ [err.param]: err.msg }));
+    const extractedErrors = {};
+    errors.array().forEach((err) => {
+      if (!extractedErrors[err.param]) {
+        extractedErrors[err.param] = err.msg;
+      }
+    });
 
     return res.status(400).json({
       errors: extractedErrors,
@@ -114,6 +122,7 @@ async function postNewRecruterAuth(req, res) {
       nom_entreprise,
       email,
       mot_de_passe,
+      confirm_pass,
       pseudonyme,
       numero_siret,
       numero_telephone,
@@ -123,17 +132,22 @@ async function postNewRecruterAuth(req, res) {
     const hashedPassword = await cryptPassword(mot_de_passe);
 
     const newRecruter = await db.query(
-      "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, pseudonyme, numero_siret, numero_telephone, adresse, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE, $4, $5, $6, $7)",
+      "INSERT INTO public.recruteur(pseudonyme, mot_de_passe, nom_entreprise, numero_siret, date_de_creation, email, numero_telephone, adresse) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5, $6, $7)",
       [
-        nom_entreprise,
-        email,
-        hashedPassword,
         pseudonyme,
+        hashedPassword,
+        nom_entreprise,
         numero_siret,
+        email,
         numero_telephone,
         adresse,
       ]
     );
+
+    if (newRecruter.rows[0] === 0) {
+      res.status(404).send('You must enter your information');
+      return;
+    };
 
     res.status(200).json(newRecruter.rows[0]);
   } catch (err) {
