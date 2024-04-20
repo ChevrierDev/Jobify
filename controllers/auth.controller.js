@@ -80,7 +80,9 @@ const validate = (req, res, next) => {
   if (errors.isEmpty()) {
     return next();
   } else {
-    const extractedErrors = errors.array().map((err) => ({ [err.param]: err.msg }));
+    const extractedErrors = errors
+      .array()
+      .map((err) => ({ [err.param]: err.msg }));
 
     return res.status(400).json({
       errors: extractedErrors,
@@ -108,13 +110,29 @@ async function cryptPassword(password) {
 //post new recruter
 async function postNewRecruterAuth(req, res) {
   try {
-    const { nom_entreprise, email, mot_de_passe } = req.body;
+    const {
+      nom_entreprise,
+      email,
+      mot_de_passe,
+      pseudonyme,
+      numero_siret,
+      numero_telephone,
+      adresse,
+    } = req.body;
 
     const hashedPassword = await cryptPassword(mot_de_passe);
 
     const newRecruter = await db.query(
-      "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE)",
-      [nom_entreprise, email, hashedPassword]
+      "INSERT INTO public.recruteur(nom_entreprise, email, mot_de_passe, pseudonyme, numero_siret, numero_telephone, adresse, date_de_creation) VALUES ($1, $2, $3, CURRENT_DATE, $4, $5, $6, $7)",
+      [
+        nom_entreprise,
+        email,
+        hashedPassword,
+        pseudonyme,
+        numero_siret,
+        numero_telephone,
+        adresse,
+      ]
     );
 
     res.status(200).json(newRecruter.rows[0]);
