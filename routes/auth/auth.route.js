@@ -23,7 +23,7 @@ authRoute.get("/recruter", (req, res) => {//recruter login
 });
 
 authRoute.post("/recruter", passport.authenticate('local', {
-  successRedirect: 'http://127.0.0.1:3000/recruter',
+  successRedirect: 'http://127.0.0.1:3000/recruter/dashboard',
   failureRedirect: 'http://127.0.0.1:3000/login/recruter'
 }) );
 

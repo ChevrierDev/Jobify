@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production') {
+  require("dotenv").config();
+}
+
 const offersRoute = require("./routes/offers/offers.route");
 const homeRouter = require('./routes/home/home.route');
 const offerRoute = require('./routes/offers/offer.route');
@@ -5,7 +9,7 @@ const authRoute = require('./routes/auth/auth.route');
 const recruterRoute = require('./routes/recruter/recruter.route');
 
 const http = require("http");
-require("dotenv").config();
+
 
 const { app } = require("./app");
 

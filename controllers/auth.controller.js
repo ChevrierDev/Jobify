@@ -61,7 +61,7 @@ const recruterAuthValidationRule = () => {
       .withMessage("Pseudonyme is required")
       .isString()
       .withMessage("Pseudonyme must be a string")
-      .matches(/^\d.*\d$/)//Regex that force username to have at least one int
+      .matches(/\d+/)//Regex that force username to have at least one int
       .withMessage("Pseudonyme must contain at least one integer")
       .isLength({ min: 8, max: 15 })
       .withMessage("Pseudonyme must be between 8 and 15 characters long")
@@ -97,6 +97,7 @@ const validate = (req, res, next) => {
     });
   }
 };
+
 
 //hash password function
 async function cryptPassword(password) {
@@ -149,7 +150,7 @@ async function postNewRecruterAuth(req, res) {
       return;
     }
 
-    res.status(200).json(newRecruter.rows[0]);
+    res.redirect('/login/recruter');
   } catch (err) {
     console.log(err);
     res.status(400).send("Internal server error !");
