@@ -1,8 +1,8 @@
-const offersRoute = require("./routes/offers.route");
-const homeRouter = require('./routes/home.route');
-const offerRoute = require('./routes/offer.route');
-const authRoute = require('./routes/auth.route');
-const recruterRoute = require('./routes/recruter.route');
+const offersRoute = require("./routes/offers/offers.route");
+const homeRouter = require('./routes/home/home.route');
+const offerRoute = require('./routes/offers/offer.route');
+const authRoute = require('./routes/auth/auth.route');
+const recruterRoute = require('./routes/recruter/recruter.route');
 
 const http = require("http");
 require("dotenv").config();

@@ -7,7 +7,7 @@ const {
   updateOffer,
   offerValidationRule,
   validate,
-} = require("../controllers/offers.controller");
+} = require("../../controllers/offers.controller");
 
 const offersRoute = express.Router();
 

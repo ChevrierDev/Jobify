@@ -6,11 +6,11 @@ const {
   postNewRecruterAuth,
   validate,
   recruterAuthValidationRule,
-} = require("../controllers/auth.controller");
+} = require("../../controllers/auth.controller");
 
 //User Auth routes
 authRoute.get("/", (req, res) => {
-  res.render("auth/login", {
+  res.render("auth/users/login", {
     title: "Connectez vous.",
   });
 });
