@@ -28,8 +28,19 @@ async function initializePassport(passport) {
   });
 
   passport.deserializeUser(async (id, done) => {
-    done(null, id);
+    try {
+      const query = `SELECT * FROM recruteur WHERE recruteur_id = $1`;
+      const { rows } = await db.query(query, [id]);
+      const user = rows[0];
+      if (!user) {
+        return done(new Error('User not found'));
+      }
+      done(null, user);
+    } catch (err) {
+      done(err);
+    }
   });
+  
 }
 
 module.exports = initializePassport;

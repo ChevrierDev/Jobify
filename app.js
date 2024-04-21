@@ -4,15 +4,12 @@ if (process.env.NODE_ENV !== "production") {
 const initializePassport = require("./config/passport.config");
 
 const express = require("express");
-const db = require("./config/db");
-
 const passport = require("passport");
 const session = require("express-session");
 
-
 const path = require("path");
 const helmet = require("helmet");
-const flash = require('express-flash')
+const flash = require("express-flash");
 
 const logger = require("morgan");
 
@@ -33,14 +30,17 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //auth the user in the DB
-initializePassport(
-  passport,
-  (email) => { return users.find((users) => users.email === email); },
-  (id) => { return users.find((users) => users.id === id); }
-);
-
+initializePassport(passport);
 
 const checkAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect("login");
+  }
+};
+
+const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
@@ -59,4 +59,4 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(logger("tiny"));
 
-module.exports = { app, checkAuthenticated };
+module.exports = { app, checkAuthenticated, checkNotAuthenticated };

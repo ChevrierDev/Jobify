@@ -10,13 +10,13 @@ recruterRoute.get("/", (req, res) => {
 });
 
 recruterRoute.get(
-  "/dashboard", 
-  passport.authenticate("local"),
-  function (req, res, next) {
+  "/dashboard",
+  (req, res, next) => {
     res.render("layouts/recruter/recruter_dashboard", {
-      title: "Votre espace personnel",
+      title: "Votre tableau de bord",
+      user: req.user,
     });
-    next();
+    next()
   }
 );
 
