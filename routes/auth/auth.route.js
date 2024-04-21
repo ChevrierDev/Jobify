@@ -1,5 +1,6 @@
 const express = require("express");
-const passport = require('passport')
+const passport = require('passport');
+const flash = require('express-flash')
 
 const authRoute = express.Router();
 const {
@@ -22,10 +23,14 @@ authRoute.get("/recruter", (req, res) => {//recruter login
   });
 });
 
-authRoute.post("/recruter", passport.authenticate('local', {
-  successRedirect: 'http://127.0.0.1:3000/recruter/dashboard',
-  failureRedirect: 'http://127.0.0.1:3000/login/recruter'
-}) );
+authRoute.post(
+  "/recruter",
+  passport.authenticate("local", {
+    successRedirect: "/recruter/dashboard",
+    failureRedirect: "/login/recruter",
+    failureFlash: true,
+  })
+);
 
 authRoute.get("/recruter/register", (req, res) => {//recruter register
   res.render("auth/recruter/recruter_register", {

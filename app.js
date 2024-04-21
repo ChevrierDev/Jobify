@@ -1,6 +1,7 @@
-if (process.env.NODE_ENV !== 'production') {
-    require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
 }
+const initializePassport = require("./config/passport.config");
 
 const express = require("express");
 const db = require("./config/db");
@@ -8,16 +9,16 @@ const db = require("./config/db");
 const passport = require("passport");
 const session = require("express-session");
 
-const LocalStrategy = require("passport-local").Strategy;
 
 const path = require("path");
 const helmet = require("helmet");
-const bcrypt = require("bcrypt");
+const flash = require('express-flash')
 
 const logger = require("morgan");
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
+app.use(flash());
 
 //initialise user session
 app.use(
@@ -32,60 +33,20 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //auth the user in the DB
-const authUser = async (email, password, userType, done) => {
-  try {
-    let user;
-    let tableName;
+initializePassport(
+  passport,
+  (email) => { return users.find((users) => users.email === email); },
+  (id) => { return users.find((users) => users.id === id); }
+);
 
-    switch (userType) {
-      case "recruteur":
-        tableName = "recruteur";
-        break;
-      case "users":
-        tableName = "users";
-        break;
-      case "admin":
-        tableName = "admin";
-        break;
-      default:
-        return done(new Error("User type invalid"));
-    }
-    const query = `SELECT * FROM ${userType} WHERE email = $1`;
-    const results = db.query(query, [email]);
-    user = user.rows[0];
-
-    if (!user) {
-      return done(null, false, { message: "incorrect email adress" });
-    }
-
-    const passwordMatched = await bcrypt.compare(password, user.passport);
-    if (!passwordMatched) {
-      return done(null, false, { message: "incorrect password" });
-    }
-
-    return done(null, user);
-  } catch (err) {
-    return done.err;
-  }
-};
-
-passport.use(new LocalStrategy(authUser));
-
-passport.serializeUser( (user, done) => {
-    done(null, user)
-});
-
-passport.deserializeUser( (id, done) => {
-    done(null, id)
-});
 
 const checkAuthenticated = (req, res, next) => {
-    if (req.isAuthenticated()) {
-        return next()
-    }else{
-        res.redirect('login')
-    }
-}
+  if (req.isAuthenticated()) {
+    return next();
+  } else {
+    res.redirect("login");
+  }
+};
 
 app.use(helmet());
 app.use(express.json());
