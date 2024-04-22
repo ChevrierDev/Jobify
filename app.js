@@ -23,6 +23,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
+    cookie: { maxAge: 24 * 60 * 60 * 1000, httpOnly: true }
   })
 );
 
@@ -36,7 +37,7 @@ const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect("login");
+    res.redirect("/recruter/dashboard");
   }
 };
 
@@ -44,7 +45,7 @@ const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect("login");
+    res.redirect("/login");
   }
 };
 

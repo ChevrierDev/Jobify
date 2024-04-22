@@ -9,14 +9,20 @@ recruterRoute.get("/", (req, res) => {
   });
 });
 
+
+recruterRoute.get('/logout', (req, res) => {
+  req.logout(); 
+  res.redirect('/home'); 
+});
+
+
 recruterRoute.get(
   "/dashboard",
-  (req, res, next) => {
+  (req, res) => {
     res.render("layouts/recruter/recruter_dashboard", {
       title: "Votre tableau de bord",
       user: req.user,
     });
-    next()
   }
 );
 

@@ -8,6 +8,7 @@ const {
   validate,
   recruterAuthValidationRule,
 } = require("../../controllers/auth.controller");
+const { checkAuthenticated } = require("../../app");
 
 //User Auth routes
 authRoute.get("/", (req, res) => {
@@ -18,8 +19,10 @@ authRoute.get("/", (req, res) => {
 
 //Recruter Auth routes 
 authRoute.get("/recruter", (req, res) => {//recruter login
+ 
   res.render("auth/recruter/recruter_login", {
     title: "Connectez vous en tant que recruteur.",
+    messages: req.flash('error')
   });
 });
 

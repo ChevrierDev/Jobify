@@ -5,6 +5,7 @@ const bCrypt = require('bcrypt')
 async function initializePassport(passport) {
   const authUser = async (email, password, done) => {
     try {
+      
       const query = `SELECT * FROM recruteur WHERE email = $1`; 
       const { rows } = await db.query(query, [email]);
       const user = rows[0];
@@ -17,7 +18,7 @@ async function initializePassport(passport) {
       }
       return done(null, user);
     } catch (error) {
-      return done(error);
+      done(error); 
     }
   };
 
@@ -36,11 +37,11 @@ async function initializePassport(passport) {
         return done(new Error('User not found'));
       }
       done(null, user);
+      console.log('user ---------->',user)
     } catch (err) {
       done(err);
     }
   });
-  
 }
 
 module.exports = initializePassport;

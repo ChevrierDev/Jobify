@@ -27,6 +27,11 @@
             </div>
             <div class="bg-white shadow w-full rounded-lg divide-y divide-gray-200 mt-2">
                 <div class="px-5 py-7">
+                    <% if (messages) { %>
+                        <% messages.forEach(message => { %>
+                            <li class="text-red-600 font-normal mb-4"> <%= message %></li>
+                        <% }) %>
+                      <% } %>                      
                     <form action="/login/recruter" method="POST" id="login-form">
                         <label class="font-semibold text-sm text-gray-600 pb-1 block">E-mail</label>
                         <input type="text" name="email" class="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
