@@ -28,18 +28,6 @@ authRoute.get("/recruter", (req, res) => {//recruter login
 
 authRoute.post(
   "/recruter",
-  (req, res, next) => {
-    const email = req.body.email;
-    const password = req.body.password;
-    const userType = req.body.userType;
-
-    console.log("Email:", email);
-    console.log("Password:", password);
-    console.log("UserType:", userType);
-
-    // Passez à la prochaine fonction de middleware
-    next();
-  },
   passport.authenticate("local", {
     successRedirect: "/recruter/dashboard",
     failureRedirect: "/login/recruter",

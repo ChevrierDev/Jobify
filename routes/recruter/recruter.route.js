@@ -10,9 +10,10 @@ recruterRoute.get("/", (req, res) => {
 });
 
 
-recruterRoute.get('/logout', (req, res) => {
-  req.logout(); 
-  res.redirect('/home'); 
+recruterRoute.post('/dashboard/logout', (req, res) => {
+  req.logout(() => {
+    res.redirect('/login/recruter');
+  });
 });
 
 

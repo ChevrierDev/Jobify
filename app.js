@@ -10,6 +10,7 @@ const session = require("express-session");
 const path = require("path");
 const helmet = require("helmet");
 const flash = require("express-flash");
+const methodOverride = require('method-override')
 
 const logger = require("morgan");
 
@@ -30,6 +31,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(methodOverride('_method'))
+
 //auth the user in the DB
 initializePassport(passport);
 
@@ -37,15 +40,15 @@ const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   } else {
-    res.redirect("/recruter/dashboard");
+   return res.redirect("/recruter/dashboard");
   }
 };
 
 const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return next();
+    return res.redirect("/login");
   } else {
-    res.redirect("/login");
+    next();
   }
 };
 
