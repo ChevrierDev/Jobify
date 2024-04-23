@@ -7,83 +7,100 @@
     <link rel="stylesheet" href="../../public/css/output.css">
     <link rel="stylesheet"  href="../../public/css/style.css">
 </head>
-<body class="min-h-screen">
+<body class="min-h-screen bg-slate-100/100">
 
     <!-- hero offers content section -->
     <main class="min-h-[100vh]">
-        <div class="flex h-screen bg-gray-100">
+        <div class="flex h-screen p-4">
 
             <!-- sidebar -->
-            <div class="hidden md:flex flex-col w-64 bg-gray-800">
-                <div class="flex items-center justify-center h-16 bg-gray-900">
-                    <span class="text-white font-bold uppercase">Sidebar</span>
+            <div class="hidden md:flex flex-col w-64 bg-indigo-950   rounded-2xl shadow-lg">
+                <div class="flex items-center justify-center h-20 bg-indigo-950  rounded-2xl shadow-lg">
+                    <a href="/home">
+                        <img src="../../public/images/logo-transparent-png.png" alt="logo-jobify" class="h-11">
+                        <p class="text-[0.6em] font-light text-white ml-4">jobify for recruter</p>
+                    </a>
                 </div>
-                <div class="flex flex-col flex-1 overflow-y-auto">
-                    <nav class="flex-1 px-2 py-4 bg-gray-800">
-                        <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                            Dashboard
-                        </a>
-                        <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                            Messages
-                        </a>
-                        <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                            Settings
-                        </a>
+                <div class="flex flex-col flex-1 overflow-y-auto rounded-b-2xl shadow-lg ">
+                    <nav class="flex-1 flex flex-col justify-between px-2 py-4 bg-blue-700/95 space-y-1 ">
+                        <div class="container">
+                            <p class="text-white font-light text sm pl-3">admin tools</p>
+                            <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-white hover:text-black  hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                                Dashboard
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Messages
+                            </a>
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                                Settings
+                            </a>    
+                        </div>
+                     
+                        <div class="container flex flex-col items-center justify-end w-[15vw] min-h-[30vh] p-5 mx-auto rounded-xl  bg-blue-500 space-y-5">
+                            <p class="text-white text-center text-xs leading-6 tracking-wider">Avez-vous des problèmes pour gérer votre tableau de bord ? <br> Essayez de contacter le support client.</p>
+                            <button type="submit" class=" shadow-sm bg-sky-400  text-white  text-sm font-medium w-40 tracking-wide h-11 rounded-lg hover:scale-105 duration-300 ease-in-out">
+                                Contact Us
+                            </button>
+                        </div>
                     </nav>
                 </div>
             </div>
         
             <!-- Main content -->
-            <div class="flex flex-col flex-1 overflow-y-auto">
-                <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
+            <div class="flex flex-col flex-1 overflow-y-auto ">
+                <div class="flex items-center justify-between h-24  bg-transparent">
                     <div class="flex items-center px-4">
-                        <button class="text-gray-500 focus:outline-none focus:text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
-                        </button>
-                        <input class="mx-4 w-full border rounded-md px-4 py-2" type="text" placeholder="Search">
+                        <div class="px-4">
+                            <h1 class="text-2xl font-bold"> <span class="font-light text-gray-700 text-lg tracking-wide">Welcome Back,</span> <br> <span class="font-bold text-4xl tracking-wide "><%= user.nom_entreprise %></span> </h1>
+                        </div>
                     </div>
                     <div class="flex items-center pr-4">
+
+                        <a href="" class="font-medium text-sm  text-white mr-5">
+                            <button type="submit" class="bg-blue-800 shadow-sm flex items-center justify-around px-3 h-10 rounded-lg w-48 hover:bg-blue-900 hover:scale-105 duration-300 ease-in-out">
+                                <div >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 256 256"><path fill="white" d="M240 136v64a16 16 0 0 1-16 16H32a16 16 0 0 1-16-16v-64a16 16 0 0 1 16-16h48a8 8 0 0 1 0 16H32v64h192v-64h-48a8 8 0 0 1 0-16h48a16 16 0 0 1 16 16M85.66 77.66L120 43.31V128a8 8 0 0 0 16 0V43.31l34.34 34.35a8 8 0 0 0 11.32-11.32l-48-48a8 8 0 0 0-11.32 0l-48 48a8 8 0 0 0 11.32 11.32M200 168a12 12 0 1 0-12 12a12 12 0 0 0 12-12"/></svg>
+                                </div>
+                            Poster une annonce
+                            </button>
+                        </a>
+
                         <!-- login button -->
                         <form action="dashboard/logout" method="post">
                             <a href="" class="font-medium text-sm text-white mr-5">
-                                <button type="submit" class="bg-blue-800 w-32 h-10 rounded-lg hover:bg-blue-900 duration-300 ease-in-out">
+                                <button type="submit" class="border-2 shadow-sm border-blue-800 text-black font-medium w-32 h-10 rounded-lg hover:scale-105 duration-300 ease-in-out">
                                 déconnexion
                                 </button>
                             </a>
                         </form>
                       
-                        <button
-                            class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M12 19l-7-7 7-7m5 14l7-7-7-7" />
-                            </svg>
-                        </button>
+                        <div class="container relative">
+                            <button class="flex justify-center items-center focus:outline-none bg-white rounded-full w-10 h-10 focus:text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="blue" d="M4 8a8 8 0 1 1 16 0v4.697l2 3V20h-5.611a4.502 4.502 0 0 1-8.777 0H2v-4.303l2-3zm5.708 12a2.5 2.5 0 0 0 4.584 0zM12 2a6 6 0 0 0-6 6v5.303l-2 3V18h16v-1.697l-2-3V8a6 6 0 0 0-6-6"/></svg>
+                            </button>
+                            <div class="rounded-full w-5 h-5 flex items-center justify-center bg-blue-700 absolute top-[-6px] right-[-5.5px]">
+                                <p class="text-white text-[0.8em] text-center font-medium">2</p>
+                            </div>
+                        </div>
+                       
                     </div>
                 </div>
-                <div class="p-4">
-                    <h1 class="text-2xl font-bold">Welcome to <%= user.pseudonyme %></h1>
-                </div>
+               
             </div>
             
         </div>

@@ -2,16 +2,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const db = require('./db');
 const bCrypt = require('bcrypt')
 
-//J'ai pris les input qui sont dans mon formulaire et je les compare avec les donnée dans ma BDD
-//il faut maintenant que je récupere le type d'utilisateur envoyer a chaque reqûete que mon client fais
-//ce type d'utilisateur s'envois automatiquement dans le corp de ma requête lors que mon formulaire est envoyé
-// je dois définir un type d'utilisateur global pour ma stratégie
-//ou j'enregisterer les donnée de usertype fournis a chaque requête de mon formulaire 
-//je dois prendre les valeur dans le corp de ma reqûete.
-//enrigistrer ces valeur dans mon argument
-//faire différent cas d'utilisation lorsque la valeur de l'user change selon mon fomulaire
-//enregistrer alors cette valeur dans ma global
-//ensuite utiliser cette global pour faire un appelle dans ma BDD selon les différent cas de figure
+
 
 let userType;
 
