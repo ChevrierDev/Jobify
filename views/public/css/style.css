@@ -17,3 +17,12 @@
     overflow: hidden;
     -webkit-line-clamp: 3; 
 }
+
+
+.svg-icon {
+    fill: white;
+}
+
+a:hover .svg-icon {
+    fill: black;
+}

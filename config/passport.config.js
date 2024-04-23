@@ -23,7 +23,7 @@ async function initializePassport(passport) {
           break;
       
         default:
-          throw new Error('this user does not exist');
+          throw new Error('this user type does not exist');
           break;
       }
       
