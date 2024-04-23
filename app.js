@@ -38,17 +38,17 @@ initializePassport(passport);
 
 const checkAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return next();
+    return next(); 
   } else {
-   return res.redirect("/recruter/dashboard");
+    res.redirect("/login"); 
   }
 };
 
 const checkNotAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return res.redirect("/login");
+  if (!req.isAuthenticated()) {
+    return next(); 
   } else {
-    next();
+    res.redirect("/recruter/dashboard");
   }
 };
 

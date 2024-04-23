@@ -8,17 +8,17 @@ const {
   validate,
   recruterAuthValidationRule,
 } = require("../../controllers/auth.controller");
-const { checkAuthenticated } = require("../../app");
+const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
 
 //User Auth routes
-authRoute.get("/", (req, res) => {
+authRoute.get("/", checkNotAuthenticated, (req, res) => {
   res.render("auth/users/login", {
     title: "Connectez vous.",
   });
 });
 
 //Recruter Auth routes 
-authRoute.get("/recruter", (req, res) => {//recruter login
+authRoute.get("/recruter",  checkNotAuthenticated, (req, res) => {//recruter login
  
   res.render("auth/recruter/recruter_login", {
     title: "Connectez vous en tant que recruteur.",
@@ -35,7 +35,7 @@ authRoute.post(
   })
 );
 
-authRoute.get("/recruter/register", (req, res) => {//recruter register
+authRoute.get("/recruter/register",  checkNotAuthenticated, (req, res) => {//recruter register
   res.render("auth/recruter/recruter_register", {
     title: "Créer un compte recruteur",
   })
