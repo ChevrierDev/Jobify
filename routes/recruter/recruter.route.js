@@ -23,3 +23,4 @@ recruterRoute.get("/dashboard", checkAuthenticated, (req, res) => {
 });
 
 module.exports = recruterRoute;
+

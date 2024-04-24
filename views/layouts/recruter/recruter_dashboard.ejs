@@ -174,37 +174,52 @@
                                 <h1 class="font-medium text-start text-base">Sponsorisé</h1>
                                 <p class="font-medium text-start text-xs w-full flex-nowrap"><span>60</span> (EUR) coût total | <span>20</span> EUR jours</p>
                             </div>
-                            <!-- job status open section -->
-                            <div class="">
-                                <button class="text-white flex items-center justify-center gap-x-1  font-medium border rounded-full w-28 h-9">
-                                    <div class="w-fit flex items-center justify-center pt-[1.85px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
-                                            <path fill="#2b9216" stroke="#2b9216" stroke-width="4" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z" />
-                                        </svg>
-                                    </div>
-                                   <p class="font-medium  text-sm">Ouvert</p>
-                                   <div class="flex items-center justify-center pt-[1.85px]">
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 10l-5 5l-5-5"/></svg>
-                                   </div>
-                                </button>
+                            <!-- job status section -->
+                            <div class="relative">
+                                <!-- job status open section -->
+                                <div class="">
+                                    <button class="text-white flex items-center justify-center gap-x-1  font-medium border-2 rounded-full w-28 h-9" id="open-status-btn">
+                                        <div class="w-fit flex items-center justify-center pt-[1.85px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
+                                                <path fill="#2b9216" stroke="#2b9216" stroke-width="4" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z" />
+                                            </svg>
+                                        </div>
+                                       <p class="font-medium  text-sm">Ouvert</p>
+                                       <div class="flex items-center justify-center pt-[1.85px]">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 10l-5 5l-5-5"/></svg>
+                                       </div>
+                                    </button>
+                                </div>
+                                <!-- job status close section -->
+                                <div class="hidden">
+                                    <button class="text-white flex items-center justify-center gap-x-1  font-medium border-2 rounded-full w-28 h-9" id="close-status-btn">
+                                        <div class="w-fit flex items-center justify-center pt-[1.85px]">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
+                                                <path fill="red" stroke="red" stroke-width="4" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z" />
+                                            </svg>
+                                        </div>
+                                       <p class="font-medium  text-sm">Fermé</p>
+                                       <div class="flex items-center justify-center pt-[1.85px]">
+                                           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 10l-5 5l-5-5"/></svg>
+                                       </div>
+                                    </button>
+                                </div>
+                                <!-- status dropdown menu -->
+                                <div class="w-32 h-10 bg-white border hidden flex-col items-center justify-start absolute top-10 right-[-15px] rounded-lg shadow-lg p-2 " id="status-list">
+                                    <ul class=" optList" >
+                                        <li class="font-medium text-sm cursor-pointer tracking-normal hover:text-blue-700">
+                                            Fermer
+                                        </li>
+                                        <li class="font-medium text-sm hidden cursor-pointer tracking-normal hover:text-blue-700">
+                                            Ouvert
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
-                            <!-- job status close section -->
-                            <div class="hidden">
-                                <button class="text-white flex items-center justify-center gap-x-1  font-medium border rounded-full w-28 h-9">
-                                    <div class="w-fit flex items-center justify-center pt-[1.85px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 48 48">
-                                            <path fill="red" stroke="red" stroke-width="4" d="M24 33a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z" />
-                                        </svg>
-                                    </div>
-                                   <p class="font-medium  text-sm">Fermé</p>
-                                   <div class="flex items-center justify-center pt-[1.85px]">
-                                       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 10l-5 5l-5-5"/></svg>
-                                   </div>
-                                </button>
-                            </div>
+                            
                             <!-- job action section -->
                             <div class="relative">
-                                <button class="border-sky-900  flex items-center justify-center gap-x-1  font-medium border rounded-full w-24 h-9"  id="action-btn">
+                                <button class="border-sky-900  flex items-center justify-center gap-x-1  font-medium border-2 rounded-full w-24 h-9"  id="action-btn">
                                    <p class="font-medium text-sky-900  text-sm">Action</p>
                                    <div class="flex items-center justify-center pt-[1.85px]">
                                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"><path fill="none" stroke="rgb(12 74 110)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m17 10l-5 5l-5-5"/></svg>

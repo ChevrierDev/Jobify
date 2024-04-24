@@ -692,6 +692,14 @@ video {
   right: -25px;
 }
 
+.right-\[-15px\] {
+  right: -15px;
+}
+
+.right-5 {
+  right: 1.25rem;
+}
+
 .z-10 {
   z-index: 10;
 }
@@ -1129,6 +1137,10 @@ video {
   width: 100%;
 }
 
+.w-36 {
+  width: 9rem;
+}
+
 .min-w-\[30\%\] {
   min-width: 30%;
 }
@@ -1473,6 +1485,10 @@ video {
 
 .border-\[1px\] {
   border-width: 1px;
+}
+
+.border-4 {
+  border-width: 4px;
 }
 
 .border-b {
