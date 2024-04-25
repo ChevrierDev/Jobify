@@ -7,6 +7,7 @@ const homeRouter = require('./routes/home/home.route');
 const offerRoute = require('./routes/offers/offer.route');
 const authRoute = require('./routes/auth/auth.route');
 const recruterRoute = require('./routes/recruter/recruter.route');
+const usersRoute = require('./routes/users/users.route')
 
 const http = require("http");
 
@@ -22,6 +23,7 @@ app.use("/offers", offersRoute);
 app.use("/offer", offerRoute);
 app.use("/login", authRoute);
 app.use("/recruter", recruterRoute);
+app.use('user', usersRoute);
 
 server.listen(PORT, () => {
   console.log(`You are listening to port ${PORT}...`);
