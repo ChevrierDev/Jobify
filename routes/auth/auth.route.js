@@ -7,6 +7,7 @@ const {
   postNewRecruterAuth,
   validate,
   recruterAuthValidationRule,
+  postNewUserAuth
 } = require("../../controllers/auth.controller");
 const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
 
@@ -16,6 +17,19 @@ authRoute.get("/", checkNotAuthenticated, (req, res) => {
     title: "Connectez vous.",
   });
 });
+
+authRoute.get('/register', (req, res) => {
+  res.render("auth/users/register", {
+    title: "Créer un compte utilisateur",
+  });
+});
+
+
+
+
+authRoute.post('/register', postNewUserAuth)
+
+
 
 //Recruter Auth routes 
 authRoute.get("/recruter",  checkNotAuthenticated, (req, res) => {//recruter login

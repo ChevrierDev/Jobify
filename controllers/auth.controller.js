@@ -15,7 +15,8 @@ const recruterAuthValidationRule = () => {
       .isEmail()
       .withMessage("This is not a valid email adress")
       .trim()
-      .custom(async (value, { req }) => {// custom validation that look if email already register in the DB
+      .custom(async (value, { req }) => {
+        // custom validation that look if email already register in the DB
         const query =
           "SELECT EXISTS (SELECT 1 FROM recruteur WHERE email = $1) AS email_exists";
         const result = await db.query(query, [value]);
@@ -33,7 +34,7 @@ const recruterAuthValidationRule = () => {
       .trim()
       .isLength({ min: 10, max: 40 })
       .withMessage("Your Password need a minimums of 10 charaters")
-      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)//regex that fordify password
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/) //regex that fordify password
       .withMessage(
         "Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."
       ),
@@ -61,11 +62,12 @@ const recruterAuthValidationRule = () => {
       .withMessage("Pseudonyme is required")
       .isString()
       .withMessage("Pseudonyme must be a string")
-      .matches(/\d+/)//Regex that force username to have at least one int
+      .matches(/\d+/) //Regex that force username to have at least one int
       .withMessage("Pseudonyme must contain at least one integer")
       .isLength({ min: 8, max: 15 })
       .withMessage("Pseudonyme must be between 8 and 15 characters long")
-      .custom(async (value) => {// look if the username already exist in the database
+      .custom(async (value) => {
+        // look if the username already exist in the database
         const query =
           "SELECT EXISTS (SELECT 1 FROM recruteur WHERE pseudonyme = $1) AS pseudonyme_exists";
         const results = await db.query(query, [value]);
@@ -97,7 +99,6 @@ const validate = (req, res, next) => {
     });
   }
 };
-
 
 //hash password function
 async function cryptPassword(password) {
@@ -150,7 +151,45 @@ async function postNewRecruterAuth(req, res) {
       return;
     }
 
-    res.redirect('/login/recruter');
+    res.redirect("/login/recruter");
+  } catch (err) {
+    console.log(err);
+    res.status(400).send("Internal server error !");
+  }
+}
+
+//post new User feature
+async function postNewUserAuth(req, res) {
+  try {
+    const {
+      users_firstname,
+      users_lastname,
+      email,
+      mot_de_passe,
+      confirm_pass,
+    } = req.body;
+
+    const hashedPassword = await cryptPassword(mot_de_passe);
+
+    const newRecruter = await db.query(
+      "INSERT INTO public.recruteur(pseudonyme, mot_de_passe, nom_entreprise, numero_siret, date_de_creation, email, numero_telephone, adresse) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5, $6, $7)",
+      [
+        pseudonyme,
+        hashedPassword,
+        nom_entreprise,
+        numero_siret,
+        email,
+        numero_telephone,
+        adresse,
+      ]
+    );
+
+    if (newRecruter.rows[0] === 0) {
+      res.status(404).send("You must enter your information");
+      return;
+    }
+
+    res.redirect("/login/recruter");
   } catch (err) {
     console.log(err);
     res.status(400).send("Internal server error !");
@@ -159,6 +198,7 @@ async function postNewRecruterAuth(req, res) {
 
 module.exports = {
   postNewRecruterAuth,
+  postNewUserAuth,
   recruterAuthValidationRule,
   validate,
 };
