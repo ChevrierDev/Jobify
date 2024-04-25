@@ -23,7 +23,7 @@ app.use("/offers", offersRoute);
 app.use("/offer", offerRoute);
 app.use("/login", authRoute);
 app.use("/recruter", recruterRoute);
-app.use('user', usersRoute);
+app.use('/user', usersRoute);
 
 server.listen(PORT, () => {
   console.log(`You are listening to port ${PORT}...`);

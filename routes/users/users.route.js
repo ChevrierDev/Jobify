@@ -4,14 +4,15 @@ const passport = require("passport");
 const { checkAuthenticated } = require("../../app");
 
 
-usersRoute.post("/dashboard/logout", checkAuthenticated, (req, res) => {
+usersRoute.post("/dashboard/logout", (req, res) => {
   req.logout(() => {
-    res.redirect("/login/recruter");
+    res.redirect("/login");
   });
 });
 
-usersRoute.get("/dashboard", checkAuthenticated, (req, res) => {
-  res.render("layouts/recruter/recruter_dashboard", {
+usersRoute.get("/dashboard", (req, res) => {
+    console.log(req.body.userType)
+  res.render("layouts/users/users_dashboard", {
     title: "votre espace personnel",
     user: req.user,
   });

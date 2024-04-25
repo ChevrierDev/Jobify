@@ -12,25 +12,41 @@ const {
 } = require("../../controllers/auth.controller");
 const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
 
-//User Auth routes
-authRoute.get("/", checkNotAuthenticated, (req, res) => {
+//User render login routes
+authRoute.get("/", (req, res) => {
   res.render("auth/users/login", {
     title: "Connectez vous.",
   });
 });
 
+//User register routes
 authRoute.get("/register", (req, res) => {
   res.render("auth/users/register", {
     title: "Créer un compte utilisateur",
   });
 });
 
+//User authentification routes
+authRoute.post(
+  "/",
+  passport.authenticate("local", {
+    successRedirect: "/user/dashboard",
+    failureRedirect: "/login",
+    failureFlash: true,
+  })
+);
+
+
+//user registration route
 authRoute.post(
   "/register",
   userAuthValidationRule(),
   validate,
   postNewUserAuth
 );
+
+
+
 
 //Recruter Auth routes
 authRoute.get("/recruter", checkNotAuthenticated, (req, res) => {
@@ -42,6 +58,7 @@ authRoute.get("/recruter", checkNotAuthenticated, (req, res) => {
   });
 });
 
+//recruter login route
 authRoute.post(
   "/recruter",
   passport.authenticate("local", {
