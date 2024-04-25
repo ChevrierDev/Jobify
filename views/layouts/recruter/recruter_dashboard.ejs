@@ -175,7 +175,7 @@
                                 <p class="font-medium text-start text-xs w-full flex-nowrap"><span>60</span> (EUR) coût total | <span>20</span> EUR jours</p>
                             </div>
                             <!-- job status section -->
-                            <div class="relative">
+                            <div class="relative" id="job-status-div">
                                 <!-- job status open section -->
                                 <div class="">
                                     <button class="text-white flex items-center justify-center gap-x-1  font-medium border-2 rounded-full w-28 h-9" id="open-status-btn">
@@ -206,11 +206,11 @@
                                 </div>
                                 <!-- status dropdown menu -->
                                 <div class="w-32 h-10 bg-white border hidden flex-col items-center justify-start absolute top-10 right-[-15px] rounded-lg shadow-lg p-2 " id="status-list">
-                                    <ul class=" optList" >
-                                        <li class="font-medium text-sm cursor-pointer tracking-normal hover:text-blue-700">
+                                    <ul class="optList" >
+                                        <li class="font-medium text-sm cursor-pointer tracking-normal hover:text-blue-700" id="openBtnStatus">
                                             Fermer
                                         </li>
-                                        <li class="font-medium text-sm hidden cursor-pointer tracking-normal hover:text-blue-700">
+                                        <li class="font-medium text-sm hidden cursor-pointer tracking-normal hover:text-blue-700" id="openBtnStatus">
                                             Ouvert
                                         </li>
                                     </ul>
@@ -245,7 +245,7 @@
                            
                         </div>
                     </div>
-                   
+                    
                     
                 </div>
 

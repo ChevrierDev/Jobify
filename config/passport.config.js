@@ -14,12 +14,12 @@ async function initializePassport(passport) {
           userType = 'recruteur';
           break;
       
-        case 'user':
-          userType = 'user';
+        case 'users':
+          userType = 'users';
           break;
       
-        case 'admin':
-          userType = 'admin';
+        case 'admins':
+          userType = 'admins';
           break;
       
         default:
