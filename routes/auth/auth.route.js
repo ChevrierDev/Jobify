@@ -7,7 +7,8 @@ const {
   postNewRecruterAuth,
   validate,
   recruterAuthValidationRule,
-  postNewUserAuth
+  postNewUserAuth,
+  userAuthValidationRule
 } = require("../../controllers/auth.controller");
 const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
 

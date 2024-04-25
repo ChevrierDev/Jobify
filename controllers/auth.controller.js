@@ -81,6 +81,47 @@ const recruterAuthValidationRule = () => {
   ];
 };
 
+//user Auhtentification Rules features 
+const userAuthValidationRule = () => {
+  return [
+    body("users_firstname")
+      .notEmpty()
+      .withMessage("You must enter your first name")
+      .isString()
+      .withMessage("Your first name must be a string")
+      .trim(),
+    body("users_lastname")
+      .notEmpty()
+      .withMessage("You must enter your last name")
+      .isString()
+      .withMessage("Your last name must be a string")
+      .trim(),
+    body("email")
+      .notEmpty()
+      .withMessage("You must enter your email")
+      .isEmail()
+      .withMessage("You must enter a correct email adress")
+      .trim(),
+    body("mot_de_passe")
+      .notEmpty()
+      .withMessage("You must enter a password")
+      .isLength({ min: 10, max: 40 })
+      .withMessage("Your Password need a minimums of 10 charaters")
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)
+      .withMessage(
+        "Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."
+      )
+      .trim(),
+    body("confirm_pass")
+      .notEmpty()
+      .withMessage("You must confirm your password")
+      .custom((value, { req }) => {
+        return value === req.body.mot_de_passe;
+      })
+      .withMessage("Passwords do not match"),
+  ];
+};
+
 //handle validation error middleware
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -171,25 +212,17 @@ async function postNewUserAuth(req, res) {
 
     const hashedPassword = await cryptPassword(mot_de_passe);
 
-    const newRecruter = await db.query(
-      "INSERT INTO public.recruteur(pseudonyme, mot_de_passe, nom_entreprise, numero_siret, date_de_creation, email, numero_telephone, adresse) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5, $6, $7)",
-      [
-        pseudonyme,
-        hashedPassword,
-        nom_entreprise,
-        numero_siret,
-        email,
-        numero_telephone,
-        adresse,
-      ]
+    const newUser = await db.query(
+      "INSERT INTO public.users(users_firstname, users_lastname, email, mot_de_passe, date_creation) VALUES ($1, $2, $3, $4, CURRENT_DATE)",
+      [users_firstname, users_lastname, email, hashedPassword]
     );
 
-    if (newRecruter.rows[0] === 0) {
+    if (newUser.rows[0] === 0) {
       res.status(404).send("You must enter your information");
       return;
     }
 
-    res.redirect("/login/recruter");
+    res.redirect("/login");
   } catch (err) {
     console.log(err);
     res.status(400).send("Internal server error !");
@@ -200,5 +233,6 @@ module.exports = {
   postNewRecruterAuth,
   postNewUserAuth,
   recruterAuthValidationRule,
+  userAuthValidationRule,
   validate,
 };
