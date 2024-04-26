@@ -9,7 +9,7 @@ recruterRoute.get("/", (req, res) => {
   });
 });
 
-recruterRoute.post("/dashboard/logout", checkAuthenticated, (req, res) => {
+recruterRoute.post("/dashboard/logout", (req, res) => {
   req.logout(() => {
     res.redirect("/login/recruter");
   });
