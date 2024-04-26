@@ -31,8 +31,9 @@ app.use(
   })
 );
 
+app.use(passport.session() );
 app.use(passport.initialize());
-app.use(passport.session());
+
 
 app.use(methodOverride('_method'))
 
@@ -49,11 +50,15 @@ const checkAuthenticated = (req, res, next) => {
 
 const checkNotAuthenticated = (req, res, next) => {
   if (!req.isAuthenticated()) {
+    console.log("L'utilisateur n'est pas authentifié.");
     return next(); 
   } else {
+    console.log("L'utilisateur est déjà authentifié."); 
+    console.log('user type check ---->', req.user.userType)
     res.redirect("/recruter/dashboard");
   }
 };
+
 const staticFilesPath = path.join(__dirname, 'views');
 
 app.use(helmet());

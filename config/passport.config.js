@@ -19,20 +19,20 @@ async function initializePassport(passport) {
         default:
           throw new Error("this user type does not exist");
       }
-      
+
       const query = `SELECT * FROM ${userType} WHERE email = $1`;
       const { rows } = await db.query(query, [email]);
       const user = rows[0];
-      
+
       if (!user) {
         return done(null, false, { message: "Incorrect email address" });
       }
-      
+
       const passwordMatched = await bCrypt.compare(password, user.mot_de_passe);
       if (!passwordMatched) {
         return done(null, false, { message: "Incorrect password" });
       }
-      
+
       user.userType = userType;
       return done(null, user, userType);
     } catch (error) {
@@ -58,22 +58,23 @@ async function initializePassport(passport) {
     switch (user.userType) {
       case "recruteur":
         userId = user.recruteur_id;
-        userType = 'recruteur';
+        userType = "recruteur";
         break;
       case "users":
         userId = user.users_id;
-        userType = 'users';
+        userType = "users";
         break;
       case "admin":
         userId = user.admin_id;
-        userType = 'admin';
+        userType = "admin";
         break;
       default:
         return done(new Error("Unknown user type"));
     }
+
    
+    
     done(null, { id: userId, type: userType });
-    console.log('usertypeSerialize:', userType);
   });
 
   passport.deserializeUser(async (idObj, done) => {
@@ -93,22 +94,22 @@ async function initializePassport(passport) {
         default:
           return done(new Error("Unknown user type"));
       }
-      
-      console.log('usertypeDeserialize:', userType);
+  
       const query = `SELECT * FROM ${userType} WHERE ${userType}_id = $1`;
       const { rows } = await db.query(query, [id]);
       const user = rows[0];
-      
+  
       if (!user) {
         return done(new Error("User not found"));
       }
 
-      done(null, user);
-      console.log(user);
+      user.userType = userType;
+      return done(null, user, userType);
     } catch (err) {
       done(err);
     }
   });
+  
 }
 
 module.exports = initializePassport;
