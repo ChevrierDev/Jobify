@@ -83,4 +83,22 @@ authRoute.get('/admin', (req, res) => {
   });
 })
 
+//admin post login credential
+authRoute.post(
+  "/admin",
+  passport.authenticate("local", {
+    successRedirect: "/admin/dashboard",
+    failureRedirect: "/home",
+    failureFlash: true,
+  })
+);
+
+//admin register page
+authRoute.get('/admin/register', (req, res) => {
+  res.render('auth/admin/admin_register', {
+    title: "Créez vous un compte administrateur"
+  })
+})
+
+
 module.exports = authRoute;

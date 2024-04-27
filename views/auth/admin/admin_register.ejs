@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <!-- Charset and viewport definition -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Page title -->
+    <title><%= title %></title>
+    <!-- Stylesheet links -->
+    <link rel="stylesheet" href="../../public/css/output.css">
+    <link rel="stylesheet"  href="../../public/css/style.css">
+</head>
+<body class="min-h-screen bg-slate-300">
+  
+    <!-- Login form section -->
+    <main class="min-h-screen flex flex-col  p-20">
+        
+        <div class="w-[30rem] max-w-xl mx-auto  bg-white dark:bg-gray-800 rounded-lg shadow-md px-8 py-10 flex flex-col items-center">
+            <!-- Logo and Brand Name -->
+            <div class="flex flex-col pl-5 mb-4  w-fit">
+                <a href="/home#" class="flex items-center space-x-3 rtl:space-x-reverse">
+                    <img src="../../public/images/logo-transparent-png.png" class="h-14" alt="jobify Logo" />
+                </a>
+            </div>
+            <!-- Form title -->
+            <h1 class="text-xl font-bold text-center text-gray-700 dark:text-gray-200 mb-8">Bienvenue chez Jobify</h1>
+            <!-- Form -->
+            <form action="/login/register" method="post" enctype="application/x-www-form-urlencoded" class="w-full flex flex-col gap-4" id="recruterForm">
+                <!-- First name field -->
+                <div class="flex items-start flex-col justify-start">
+                <label for="usersName" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Prénom: *</label>
+                <input type="text" id="userFirsName" name="users_firstname" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- last name field -->
+                <div class="flex items-start flex-col justify-start">
+                    <label for="userLastName" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Nom: *</label>
+                    <input type="text" id="userLastName" name="users_lastname" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500">
+                </div>
+
+                <!-- email field -->
+                <div class="flex items-start flex-col justify-start">
+                    <label for="phoneNumber" class="text-sm text-gray-700 dark:text-gray-200 mr-2">email:</label>
+                    <input type="text" id="email" name="email" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                <!-- Password field -->
+                <div class="flex items-start flex-col justify-start">
+                    <label for="password" class="text-sm text-gray-700 dark:text-gray-200 mr-2">mot de passe: * </label>
+                    <input type="password" id="password" name="mot_de_passe" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                </div>
+
+                 
+                <!-- confirm password  -->
+                <div class="flex items-start flex-col justify-start">
+                    <label for="confirmPass" class="text-sm text-gray-700 dark:text-gray-200 mr-2">Confirmer mot de passe: * </label>
+                    <input type="password" id="confirmPass" name="confirm_pass" class="w-full px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                    </div>
+    
+                <!-- Register button -->
+                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-md shadow-sm">Register</button>
+            </form>
+
+            <!-- Login link -->
+            <div class="mt-4 text-center">
+                <span class="text-sm text-gray-500 dark:text-gray-300">Already have an account? </span>
+                <a href="http://127.0.0.1:3000/login/recruter" class="text-blue-500 hover:text-blue-600">Login</a>
+            </div>
+        </div>
+    </main>
+
+     <!-- footer section -->
+     <footer class="bg-white rounded-t-sm shadow dark:bg-gray-900  w-full mt-28">
+        <div class="w-full max-w-screen-xl mx-auto p-4 md:py-8 h-full">
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <a href="http://127.0.0.1:3000/home#" class="flex items-center mb-4 sm:mb-0 space-x-3 rtl:space-x-reverse">
+                    <img src="../../public/images/logo-transparent-png.png" class="h-16" alt="Jobify Logo" />
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Jobify</span>
+                </a>
+                <ul class="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">About</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Privacy Policy</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline me-4 md:me-6">Licensing</a>
+                    </li>
+                    <li>
+                        <a href="#" class="hover:underline">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2023 <a href="http://127.0.0.1:3000/home#" class="hover:underline">Jobify</a>. All Rights Reserved.</span>
+        </div>
+    </footer>
+    
+</body>
+</html>

@@ -9,6 +9,7 @@ const authRoute = require('./routes/auth/auth.route');
 const recruterRoute = require('./routes/recruter/recruter.route');
 const usersRoute = require('./routes/users/users.route');
 const unauthorizedRoute = require('./routes/auth/unauthorized.route');
+const adminRoute = require('./routes/admin/admin.route');
 
 const http = require("http");
 
@@ -25,8 +26,8 @@ app.use("/offer", offerRoute);
 app.use("/login", authRoute);
 app.use("/recruter", recruterRoute);
 app.use('/users', usersRoute);
-// app.use('/admin', adminRoute);
-app.use('/unauthorized', unauthorizedRoute)
+app.use('/admin', adminRoute);
+app.use('/unauthorized', unauthorizedRoute);
 
 server.listen(PORT, () => {
   console.log(`You are listening to port ${PORT}...`);
