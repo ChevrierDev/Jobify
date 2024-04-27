@@ -127,37 +127,13 @@ const adminAuthValidationRule = () => {
       .withMessage("You must enter a pseudo")
       .isString()
       .withMessage("Your first name must be a string")
-      .trim()
-      .custom(async (value) => {
-        // look if the username already exist in the database
-        const query =
-          "SELECT EXISTS (SELECT 1 FROM recruteur WHERE pseudonyme = $1) AS pseudonyme_exists";
-        const results = await db.query(query, [value]);
-        const { pseudonyme_exists } = results.rows[0];
-
-        if (pseudonyme_exists) {
-          throw new Error("This username already exists.");
-        }
-      })
-      .withMessage("Username already exists"),
+      .trim(),
     body("email")
       .notEmpty()
       .withMessage("You must enter your email")
       .isEmail()
       .withMessage("You must enter a correct email adress")
-      .trim()
-      .custom(async (value, { req }) => {
-        const query =
-          "SELECT EXISTS (SELECT 1 FROM admin WHERE email = $1) AS email_exists";
-        const result = await db.query(query, [value]);
-        const { email_exists } = result.rows[0];
-
-        if (email_exists) {
-          throw new Error("This email address is already registered.");
-        }
-      })
-      .withMessage("User with this adress already exist"),
-    ,
+      .trim(),
     body("mot_de_passe")
       .notEmpty()
       .withMessage("You must enter a password")
@@ -177,6 +153,7 @@ const adminAuthValidationRule = () => {
       .withMessage("Passwords do not match"),
   ];
 };
+
 
 //handle validation error middleware
 const validate = (req, res, next) => {

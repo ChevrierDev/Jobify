@@ -12,6 +12,7 @@ const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
 const {
   recruterAuthValidationRule,
   userAuthValidationRule,
+  adminAuthValidationRule,
   validate,
 } = require("../../config/validationRule");
 
@@ -81,7 +82,7 @@ authRoute.post(
 );
 
 //Admin Auth routes
-authRoute.get("/admin", (req, res) => {
+authRoute.get("/admin", checkNotAuthenticated, (req, res) => {
   //admin login page
   res.render("auth/admin/admin_login", {
     title: "Connectez vous en tant qu'Administrateur",
@@ -99,18 +100,20 @@ authRoute.post(
 );
 
 //admin register page
-authRoute.get("/admin/register", (req, res) => {
+authRoute.get("/admin/register", checkNotAuthenticated, (req, res) => {
   res.render("auth/admin/admin_register", {
     title: "Créez vous un compte administrateur",
   });
 });
 
+
 //create new admin
 authRoute.post(
   "/admin/register",
-  recruterAuthValidationRule(),
+  adminAuthValidationRule(),
   validate,
   postAdminAuth
 );
+
 
 module.exports = authRoute;

@@ -29,6 +29,7 @@ async function initializePassport(passport) {
       }
 
       const passwordMatched = await bCrypt.compare(password, user.mot_de_passe);
+      console.log(passwordMatched)
       if (!passwordMatched) {
         return done(null, false, { message: "Incorrect password" });
       }

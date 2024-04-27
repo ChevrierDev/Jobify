@@ -97,10 +97,10 @@ async function postAdminAuth(req, res) {
     const hashedPassword = await cryptPassword(mot_de_passe);
 
     const newUser = await db.query(
-      "INSERT INTO public.admin(pseudonyme, email, mot_de_passe,) VALUES ($1, $2, $3)",
+      "INSERT INTO public.admin(pseudonyme, email, mot_de_passe) VALUES ($1, $2, $3)",
       [pseudonyme, email, hashedPassword]
     );
-
+    
     if (newUser.rows[0] === 0) {
       res.status(404).send("You must enter your information");
       return;
