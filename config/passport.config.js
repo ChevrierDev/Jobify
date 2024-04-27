@@ -20,27 +20,31 @@ async function initializePassport(passport) {
           throw new Error("this user type does not exist");
       }
 
+      console.log('usertype --------------------->', userType);
+  
       const query = `SELECT * FROM ${userType} WHERE email = $1`;
       const { rows } = await db.query(query, [email]);
       const user = rows[0];
-
+  
       if (!user) {
         return done(null, false, { message: "Incorrect email address" });
       }
-
+  
       const passwordMatched = await bCrypt.compare(password, user.mot_de_passe);
-      console.log(passwordMatched)
+      console.log('is password match ?  ----------------->', passwordMatched)
       if (!passwordMatched) {
         return done(null, false, { message: "Incorrect password" });
       }
-
+  
+      // Définir correctement le type d'utilisateur ici
       user.userType = userType;
-      return done(null, user, userType);
+  
+      return done(null, user);
     } catch (error) {
       done(error);
     }
   }
-
+  
   passport.use(
     new LocalStrategy(
       {
@@ -74,7 +78,7 @@ async function initializePassport(passport) {
     }
 
    
-    
+    console.log('serialise user  ----------------->', user)
     done(null, { id: userId, type: userType });
   });
 
@@ -100,6 +104,7 @@ async function initializePassport(passport) {
       const { rows } = await db.query(query, [id]);
       const user = rows[0];
   
+      console.log('deserialise user  ----------------->', user)
       if (!user) {
         return done(new Error("User not found"));
       }
