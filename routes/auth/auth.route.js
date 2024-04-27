@@ -6,9 +6,14 @@ const authRoute = express.Router();
 const {
   postNewRecruterAuth,
   postNewUserAuth,
+  postAdminAuth,
 } = require("../../controllers/auth.controller");
 const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
-const { recruterAuthValidationRule, userAuthValidationRule, validate } = require('../../config/validationRule') 
+const {
+  recruterAuthValidationRule,
+  userAuthValidationRule,
+  validate,
+} = require("../../config/validationRule");
 
 //User render login routes
 authRoute.get("/", checkNotAuthenticated, (req, res) => {
@@ -76,12 +81,12 @@ authRoute.post(
 );
 
 //Admin Auth routes
-authRoute.get('/admin', (req, res) => {
+authRoute.get("/admin", (req, res) => {
   //admin login page
   res.render("auth/admin/admin_login", {
     title: "Connectez vous en tant qu'Administrateur",
   });
-})
+});
 
 //admin post login credential
 authRoute.post(
@@ -94,11 +99,18 @@ authRoute.post(
 );
 
 //admin register page
-authRoute.get('/admin/register', (req, res) => {
-  res.render('auth/admin/admin_register', {
-    title: "Créez vous un compte administrateur"
-  })
-})
+authRoute.get("/admin/register", (req, res) => {
+  res.render("auth/admin/admin_register", {
+    title: "Créez vous un compte administrateur",
+  });
+});
 
+//create new admin
+authRoute.post(
+  "/admin/register",
+  recruterAuthValidationRule(),
+  validate,
+  postAdminAuth
+);
 
 module.exports = authRoute;

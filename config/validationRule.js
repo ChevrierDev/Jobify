@@ -78,7 +78,7 @@ const recruterAuthValidationRule = () => {
   ];
 };
 
-//user Auhtentification Rules features 
+//user Auhtentification Rules features
 const userAuthValidationRule = () => {
   return [
     body("users_firstname")
@@ -119,6 +119,65 @@ const userAuthValidationRule = () => {
   ];
 };
 
+//user Auhtentification Rules features
+const adminAuthValidationRule = () => {
+  return [
+    body("pseudonyme")
+      .notEmpty()
+      .withMessage("You must enter a pseudo")
+      .isString()
+      .withMessage("Your first name must be a string")
+      .trim()
+      .custom(async (value) => {
+        // look if the username already exist in the database
+        const query =
+          "SELECT EXISTS (SELECT 1 FROM recruteur WHERE pseudonyme = $1) AS pseudonyme_exists";
+        const results = await db.query(query, [value]);
+        const { pseudonyme_exists } = results.rows[0];
+
+        if (pseudonyme_exists) {
+          throw new Error("This username already exists.");
+        }
+      })
+      .withMessage("Username already exists"),
+    body("email")
+      .notEmpty()
+      .withMessage("You must enter your email")
+      .isEmail()
+      .withMessage("You must enter a correct email adress")
+      .trim()
+      .custom(async (value, { req }) => {
+        const query =
+          "SELECT EXISTS (SELECT 1 FROM admin WHERE email = $1) AS email_exists";
+        const result = await db.query(query, [value]);
+        const { email_exists } = result.rows[0];
+
+        if (email_exists) {
+          throw new Error("This email address is already registered.");
+        }
+      })
+      .withMessage("User with this adress already exist"),
+    ,
+    body("mot_de_passe")
+      .notEmpty()
+      .withMessage("You must enter a password")
+      .isLength({ min: 10, max: 40 })
+      .withMessage("Your Password need a minimums of 10 charaters")
+      .matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{10,}$/)
+      .withMessage(
+        "Your password must contain at least one digit, one lowercase letter, one uppercase letter, one special character, and be at least 10 characters long."
+      )
+      .trim(),
+    body("confirm_pass")
+      .notEmpty()
+      .withMessage("You must confirm your password")
+      .custom((value, { req }) => {
+        return value === req.body.mot_de_passe;
+      })
+      .withMessage("Passwords do not match"),
+  ];
+};
+
 //handle validation error middleware
 const validate = (req, res, next) => {
   const errors = validationResult(req);
@@ -139,7 +198,8 @@ const validate = (req, res, next) => {
 };
 
 module.exports = {
-    recruterAuthValidationRule,
-    userAuthValidationRule,
-    validate
-}
+  recruterAuthValidationRule,
+  userAuthValidationRule,
+  adminAuthValidationRule,
+  validate,
+};

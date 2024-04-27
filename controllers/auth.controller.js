@@ -1,8 +1,6 @@
 const bCrypt = require("bcrypt");
 const db = require("../config/db");
 
-
-
 //hash password function
 async function cryptPassword(password) {
   const saltRounds = 10;
@@ -18,7 +16,7 @@ async function cryptPassword(password) {
     console.error("Error while hashing password:", error.message);
     throw error;
   }
-}
+};
 
 //post new recruter
 async function postNewRecruterAuth(req, res) {
@@ -59,7 +57,7 @@ async function postNewRecruterAuth(req, res) {
     console.log(err);
     res.status(400).send("Internal server error !");
   }
-}
+};
 
 //post new User feature
 async function postNewUserAuth(req, res) {
@@ -89,9 +87,34 @@ async function postNewUserAuth(req, res) {
     console.log(err);
     res.status(400).send("Internal server error !");
   }
-}
+};
+
+//post new recruter
+async function postAdminAuth(req, res) {
+  try {
+    const { pseudonyme, email, mot_de_passe, confirm_pass } = req.body;
+
+    const hashedPassword = await cryptPassword(mot_de_passe);
+
+    const newUser = await db.query(
+      "INSERT INTO public.admin(pseudonyme, email, mot_de_passe,) VALUES ($1, $2, $3)",
+      [pseudonyme, email, hashedPassword]
+    );
+
+    if (newUser.rows[0] === 0) {
+      res.status(404).send("You must enter your information");
+      return;
+    }
+
+    res.redirect("/login/admin/register");
+  } catch (err) {
+    console.log(err);
+    res.status(400).send("Internal server error !");
+  }
+};
 
 module.exports = {
   postNewRecruterAuth,
   postNewUserAuth,
+  postAdminAuth,
 };
