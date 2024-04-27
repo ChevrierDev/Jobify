@@ -25,6 +25,7 @@ app.use("/offer", offerRoute);
 app.use("/login", authRoute);
 app.use("/recruter", recruterRoute);
 app.use('/users', usersRoute);
+// app.use('/admin', adminRoute);
 app.use('/unauthorized', unauthorizedRoute)
 
 server.listen(PORT, () => {

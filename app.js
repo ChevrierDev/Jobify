@@ -10,8 +10,7 @@ const session = require("express-session");
 const path = require("path");
 const helmet = require("helmet");
 const flash = require("express-flash");
-const methodOverride = require('method-override');
-
+const methodOverride = require("method-override");
 
 const logger = require("morgan");
 
@@ -27,42 +26,41 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 3 * 60 * 60 * 1000,
-      httpOnly: true 
-    }
+      httpOnly: true,
+    },
   })
 );
 
-app.use(passport.session() );
+app.use(passport.session());
 app.use(passport.initialize());
 
-
-app.use(methodOverride('_method'))
+app.use(methodOverride("_method"));
 
 //auth the user in the DB
 initializePassport(passport);
 
 const checkAuthenticated = (requiredRole) => (req, res, next) => {
   if (!req.isAuthenticated()) {
-    return res.redirect('/home')
-  };
+    return res.redirect("/home");
+  }
   const userType = req.user.userType;
   if (userType !== requiredRole) {
     return redirectToRoleHomePage(req, res);
   }
-  return next()
+  return next();
 };
 
 const checkNotAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return redirectToRoleHomePage(req, res)
+    return redirectToRoleHomePage(req, res);
   }
 
   return next();
-}
+};
 
 const redirectToRoleHomePage = (req, res) => {
   const userType = req.user.userType;
-  console.log(userType)
+  console.log(userType);
   switch (userType) {
     case "recruteur":
       return res.redirect("/recruter/dashboard");
@@ -75,15 +73,14 @@ const redirectToRoleHomePage = (req, res) => {
   }
 };
 
-const staticFilesPath = path.join(__dirname, 'views');
+const staticFilesPath = path.join(__dirname, "views");
 
 app.use(helmet());
 app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "views")));
 app.use("views", express.static(path.join(__dirname, "views", "public")));
-app.use(express.static(staticFilesPath, { type: 'application/javascript' }));
-
+app.use(express.static(staticFilesPath, { type: "application/javascript" }));
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

@@ -5,12 +5,10 @@ const flash = require("express-flash");
 const authRoute = express.Router();
 const {
   postNewRecruterAuth,
-  validate,
-  recruterAuthValidationRule,
   postNewUserAuth,
-  userAuthValidationRule,
 } = require("../../controllers/auth.controller");
 const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
+const { recruterAuthValidationRule, userAuthValidationRule, validate } = require('../../config/validationRule') 
 
 //User render login routes
 authRoute.get("/", checkNotAuthenticated, (req, res) => {
@@ -36,7 +34,6 @@ authRoute.post(
   })
 );
 
-
 //user registration route
 authRoute.post(
   "/register",
@@ -44,9 +41,6 @@ authRoute.post(
   validate,
   postNewUserAuth
 );
-
-
-
 
 //Recruter Auth routes
 authRoute.get("/recruter", checkNotAuthenticated, (req, res) => {
@@ -82,5 +76,11 @@ authRoute.post(
 );
 
 //Admin Auth routes
+authRoute.get('/admin', (req, res) => {
+  //admin login page
+  res.render("auth/admin/admin_login", {
+    title: "Connectez vous en tant qu'Administrateur",
+  });
+})
 
 module.exports = authRoute;
