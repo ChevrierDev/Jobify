@@ -10,7 +10,8 @@ const session = require("express-session");
 const path = require("path");
 const helmet = require("helmet");
 const flash = require("express-flash");
-const methodOverride = require('method-override')
+const methodOverride = require('method-override');
+
 
 const logger = require("morgan");
 
@@ -40,22 +41,37 @@ app.use(methodOverride('_method'))
 //auth the user in the DB
 initializePassport(passport);
 
-const checkAuthenticated = (req, res, next) => {
-  if (req.isAuthenticated()) {
-    return next(); 
-  } else {
-    res.redirect("/login/recruter"); 
+const checkAuthenticated = (requiredRole) => (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    return res.redirect('/home')
+  };
+  const userType = req.user.userType;
+  if (userType !== requiredRole) {
+    return redirectToRoleHomePage(req, res);
   }
+  return next()
 };
 
 const checkNotAuthenticated = (req, res, next) => {
-  if (!req.isAuthenticated()) {
-    console.log("L'utilisateur n'est pas authentifié.");
-    return next(); 
-  } else {
-    console.log("L'utilisateur est déjà authentifié."); 
-    console.log('user type check ---->', req.user.userType)
-    res.redirect("/recruter/dashboard");
+  if (req.isAuthenticated()) {
+    return redirectToRoleHomePage(req, res)
+  }
+
+  return next();
+}
+
+const redirectToRoleHomePage = (req, res) => {
+  const userType = req.user.userType;
+  console.log(userType)
+  switch (userType) {
+    case "recruteur":
+      return res.redirect("/recruter/dashboard");
+    case "users":
+      return res.redirect("/users/dashboard");
+    case "admin":
+      return res.redirect("/admin/dashboard");
+    default:
+      return res.redirect("/login");
   }
 };
 

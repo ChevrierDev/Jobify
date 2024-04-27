@@ -28,7 +28,8 @@
     "nodemon": "^3.1.0",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.11.5"
+    "pg": "^8.11.5",
+    "restify": "^11.1.0"
   },
   "devDependencies": {
     "jest": "^29.7.0",

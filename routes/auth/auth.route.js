@@ -13,14 +13,14 @@ const {
 const { checkAuthenticated, checkNotAuthenticated } = require("../../app");
 
 //User render login routes
-authRoute.get("/", (req, res) => {
+authRoute.get("/", checkNotAuthenticated, (req, res) => {
   res.render("auth/users/login", {
     title: "Connectez vous.",
   });
 });
 
 //User register routes
-authRoute.get("/register", (req, res) => {
+authRoute.get("/register", checkNotAuthenticated, (req, res) => {
   res.render("auth/users/register", {
     title: "Créer un compte utilisateur",
   });
@@ -30,7 +30,7 @@ authRoute.get("/register", (req, res) => {
 authRoute.post(
   "/",
   passport.authenticate("local", {
-    successRedirect: "/user/dashboard",
+    successRedirect: "/users/dashboard",
     failureRedirect: "/login",
     failureFlash: true,
   })
@@ -51,7 +51,6 @@ authRoute.post(
 //Recruter Auth routes
 authRoute.get("/recruter", checkNotAuthenticated, (req, res) => {
   //recruter login
-  console.log("Route de connexion pour les recruteurs. Vérification de l'authentification en cours...");
   res.render("auth/recruter/recruter_login", {
     title: "Connectez vous en tant que recruteur.",
     messages: req.flash("error"),
@@ -61,10 +60,6 @@ authRoute.get("/recruter", checkNotAuthenticated, (req, res) => {
 //recruter login route
 authRoute.post(
   "/recruter",
-  (req, res, next) => {
-    console.log("Tentative de connexion...");
-    next(); // Passe au middleware suivant (passport.authenticate)
-  },
   passport.authenticate("local", {
     successRedirect: "/recruter/dashboard",
     failureRedirect: "/login/recruter",
