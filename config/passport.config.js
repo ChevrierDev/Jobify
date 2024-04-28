@@ -25,7 +25,6 @@ async function initializePassport(passport) {
       const { rows } = await db.query(query, [email]);
       const user = rows[0];
   
-      
       if (!user) {
         return done(null, false, { message: "Incorrect email address" });
       }
