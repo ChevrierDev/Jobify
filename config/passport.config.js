@@ -19,6 +19,7 @@ async function initializePassport(passport) {
         default:
           throw new Error("this user type does not exist");
       }
+      
   
       const query = `SELECT * FROM ${userType} WHERE email = $1`;
       const { rows } = await db.query(query, [email]);
