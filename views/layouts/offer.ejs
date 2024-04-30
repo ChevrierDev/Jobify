@@ -68,7 +68,11 @@
                     </div>
                     <div>
                         <p class="text-gray-700 font-normal">ID de l'employeur</p>
-                        <p class="text-black/90 font-normal">Unknow</p>
+                        <% if (offer.recruteur_id) { %>
+                            <p class="text-black/90 font-normal"><%= offer.recruteur_id %></p>
+                        <% } else { %>
+                            <p class="text-black/90 font-normal">Inconnu</p>
+                        <% } %>     
                     </div>
                     <div>
                         <p class="text-gray-700 font-normal">Diplome</p>

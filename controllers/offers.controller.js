@@ -118,6 +118,8 @@ async function postNewOffer(req, res) {
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).send("Missing required field");
     } else {
+      const recruteurId = req.user.recruteur_id; 
+
       const {
         titre,
         description,
@@ -132,7 +134,7 @@ async function postNewOffer(req, res) {
       } = req.body;
 
       const newPost = await db.query(
-        "INSERT INTO public.offres(titre, description, entreprise, lieu, date_publication, date_limite, type_contrat, salaire, experience, diplome_requis, competences, created_at, updated_at) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5::DATE, $6, $7, $8, $9, $10, NOW(), NOW())",
+        "INSERT INTO public.offres(titre, description, entreprise, lieu, date_publication, date_limite, type_contrat, salaire, experience, diplome_requis, competences, created_at, updated_at, recruteur_id) VALUES ($1, $2, $3, $4, CURRENT_DATE, $5::DATE, $6, $7, $8, $9, $10, NOW(), NOW(), $11)", 
         [
           titre,
           description,
@@ -144,6 +146,7 @@ async function postNewOffer(req, res) {
           experience,
           diplome_requis,
           competences,
+          recruteurId, 
         ]
       );
 
@@ -154,6 +157,7 @@ async function postNewOffer(req, res) {
     res.status(500).send("internal server error");
   }
 }
+
 
 //Delete offer from DB by is ID
 async function deleteOffer(req, res) {
