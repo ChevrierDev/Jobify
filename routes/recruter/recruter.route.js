@@ -2,6 +2,7 @@ const express = require("express");
 const recruterRoute = express.Router();
 const passport = require("passport");
 const { checkAuthenticated } = require("../../app");
+const { postNewOffer } = require('../../controllers/offers.controller')
 
 //render recruter home page
 recruterRoute.get("/", (req, res) => {
@@ -18,6 +19,12 @@ recruterRoute.get("/poster_offre", checkAuthenticated('recruteur'), (req, res) =
     user: req.user,
   });
 });
+
+
+//recruter post new offer 
+recruterRoute.post('/poster_offre/poster', checkAuthenticated('recruteur'),  postNewOffer, (req, res) => {
+  res.redirect('/dashboard/recruter')
+})
 
 //recruter logout systeme
 recruterRoute.post("/dashboard/logout", checkAuthenticated('recruteur'), (req, res) => {

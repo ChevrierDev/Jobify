@@ -112,13 +112,93 @@
                     </div>
                 </div>
             
-                <div class="flex space-x-2 px-2 ml-8 items-center ">
+                <div class="flex space-x-2 px-2 ml-20 items-center ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="3.2em" height="3.2em" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48"/><path fill="black" d="M459.94 53.25a16.06 16.06 0 0 0-23.22-.56L424.35 65a8 8 0 0 0 0 11.31l11.34 11.32a8 8 0 0 0 11.34 0l12.06-12c6.1-6.09 6.67-16.01.85-22.38M399.34 90L218.82 270.2a9 9 0 0 0-2.31 3.93L208.16 299a3.91 3.91 0 0 0 4.86 4.86l24.85-8.35a9 9 0 0 0 3.93-2.31L422 112.66a9 9 0 0 0 0-12.66l-9.95-10a9 9 0 0 0-12.71 0"/></svg>
-                    <p class="text-black font-bold text-2xl tracking-wide">Create a new offer</p>
+                    <p class="text-black font-bold text-2xl tracking-wide">Poster une nouvelle offre.</p>
                 </div>
 
-                <section class="bg-gray-50 min-h-screen w-[70vw]  mx-auto mt-8 rounded-lg shadow-lg">
-                    <form action="/recruter/poster_offre" method="POST"></form>
+                <section class="bg-gray-50 min-h-screen w-[60vw] p-7  mx-auto mt-8 rounded-lg shadow-lg">
+
+                    <form action="/recruter/poster_offre" method="POST" class="p-5  space-y-7 gap-x-20">
+                        <div class="flex gap-20">
+                            <div class="flex flex-col gap-y-4">
+                                <!-- titre field -->
+                                <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="titre" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Titre de l'offre</label>
+                                    <input type="text" id="titre" name="titre" class="min-w-[30vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500 " placeholder="Employée polyvalent..." required>
+                                </div>
+    
+                                <!-- companies names field -->
+                                <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="name" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Nom de l'entreprise</label>
+                                    <input type="text" id="name" name="entreprise" class="min-w-[30vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Versace & co..." required>
+                                </div>
+    
+                                <!-- companies place field -->
+                                <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="lieu" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">lieu</label>
+                                    <input type="text" id="lieu" name="lieu" class="min-w-[15vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="75008, Courcelle..." required>
+                                </div>
+
+                                <!-- skills needed field -->
+                                <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="diplome_requis" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Diplome requis</label>
+                                    <input type="text" id="diplome_requis" name="diplome_requis" class="min-w-[15vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="BAC +2" required>
+                                </div>
+
+                                <!-- skills needed field -->
+                                <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="competences" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Competences</label>
+                                    <input type="text" id="competences" name="competences" class="min-w-[15vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="Maitrise des langues..." required>
+                                </div>
+
+                            </div>
+    
+                            <div class="flex flex-col  gap-y-10">
+
+                                <!--date limit  field -->
+                                <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="date_limite" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Date limite</label>
+                                    <input type="date" id="date_limite" name="date_limite" class="min-w-[10vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" required>
+                                </div>
+
+                                <!-- contract type field -->
+                                <div class="flex items-start flex-col justify-start space-y-2 ">
+                                    <label for="titre" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">type de contrat</label>
+                                    <div class="h-10 w-32 px-5 bg-white flex items-center justify-center border border-gray-300 rounded-md">
+                                        <select name="type_contrat" id="contract-type" class="bg-transparent outline-none "  required>
+                                            <option value="alternance">Alternance</option>
+                                            <option value="CDI">CDI</option>
+                                            <option value="CDD">CDD</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                               <!-- salaries field -->
+                               <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="salaire" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">salaire</label>
+                                    <input type="text" id="salaire" name="salaire" class="max-w-[8vw] px-3 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="1200" required>
+                                </div>
+
+                               <!-- experience field -->
+                               <div class="flex items-start flex-col justify-start space-y-2">
+                                    <label for="experience" class=" text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Expérience requise</label>
+                                    <input type="text" id="experience" name="experience" class=" px-3 max-w-28 dark:text-gray-200 dark:bg-gray-900 py-2 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500" placeholder="2 ans..." required>
+                                </div>
+
+                            </div>
+                        </div>
+                        
+                        <!-- description place field -->
+                        <div class="flex flex-col space-y-2 mt-4">
+                            <label for="description" class="text-slate-900 dark:text-gray-200 mr-2 font-bold text-lg tracking-wide">Description...</label>
+                            <textarea id="description" name="description" class="max-w-[35vw] min-h-[36vh] px-3 py-2 overflow-y-auto overflow-x-hidden dark:text-gray-200 dark:bg-gray-900 rounded-md border border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-1 focus:ring-blue-500 placeholder-left align-top" placeholder="Description de l'offre..." required></textarea>
+
+                        </div>
+                        
+                        <!-- Register button -->
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-600 hover:scale-105 duration-150 ease-in-out w-40 h-11 text-white font-medium py-2 px-4 rounded-md shadow-sm">Poster</button>
+                    </form>
                 </section>
                 
             </div>
