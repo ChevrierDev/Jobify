@@ -3,19 +3,30 @@ const recruterRoute = express.Router();
 const passport = require("passport");
 const { checkAuthenticated } = require("../../app");
 
-
+//render recruter home page
 recruterRoute.get("/", (req, res) => {
   res.render("layouts/recruter/recruter_page", {
     title: "Jobify pour recruteur",
   });
 });
 
+
+//render poste offer page
+recruterRoute.get("/poster_offre", checkAuthenticated('recruteur'), (req, res) => {
+  res.render("layouts/recruter/poste_offre", {
+    title: "Poster une offre d'emplois.",
+    user: req.user,
+  });
+});
+
+//recruter logout systeme
 recruterRoute.post("/dashboard/logout", checkAuthenticated('recruteur'), (req, res) => {
   req.logout(() => {
     res.redirect("/login/recruter");
   });
 });
 
+//render recruter dashboard
 recruterRoute.get("/dashboard", checkAuthenticated('recruteur'),   (req, res) => {
   res.render("layouts/recruter/recruter_dashboard", {
     title: "Votre tableau de bord",

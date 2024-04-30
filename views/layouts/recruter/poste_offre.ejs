@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="../../public/css/output.css">
+    <link rel="stylesheet"  href="../../public/css/style.css">
+    <script defer  src="../../public/script.js"></script>
+</head>
+<body class="min-h-screen bg-slate-100/100">
+
+    <!-- hero offers content section -->
+    <main class="min-h-full">
+        <div class="flex h-full p-4">
+
+            <!-- sidebar -->
+            <div class="hidden md:flex flex-col w-64  bg-transparent  rounded-t-2xl ">
+                <div class="flex items-center justify-center h-20 bg-indigo-950  rounded-t-2xl ">
+                    <a href="/home">
+                        <img src="../../public/images/logo-transparent-png.png" alt="logo-jobify" class="h-11">
+                        <p class="text-[0.6em] font-light text-white ml-4">jobify for recruter</p>
+                    </a>
+                </div>
+                <div class="flex flex-col  overflow-y-auto rounded-b-2xl shadow-lg ">
+                    <!-- side bar navigation -->
+                    <nav class=" flex flex-col justify-between px-2 py-7 bg-blue-700/95 space-y-6 ">
+                        <div class="container">
+                            <p class="text-white font-light text sm pl-3"><%= user.userType %> tools</p>
+                  
+                            <a href="/recruter/dashboard" class="flex items-center px-4 py-2 mt-2 text-gray-100 group hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 svg-icon text-white group-hover:text-black" width="22" height="22" viewBox="0 0 24 24">
+                                    <g fill="none" stroke-linecap="round" stroke-width="1.5" stroke="currentColor" stroke-linejoin="round">
+                                        <path d="M8.557 2.75H4.682A1.932 1.932 0 0 0 2.75 4.682v3.875a1.942 1.942 0 0 0 1.932 1.942h3.875a1.942 1.942 0 0 0 1.942-1.942V4.682A1.942 1.942 0 0 0 8.557 2.75z"/>
+                                        <path d="M18.318 2.75H14.443a1.942 1.942 0 0 0-1.942 1.932v3.875a1.943 1.943 0 0 0 1.942 1.942h3.875a1.942 1.942 0 0 0 1.932-1.942V4.682a1.932 1.932 0 0 0-1.932-1.932z"/>
+                                        <path d="M8.557 13.5H4.682a1.943 1.943 0 0 0-1.932 1.943v3.875a1.932 1.932 0 0 0 1.932 1.932h3.875a1.942 1.942 0 0 0 1.942-1.932v-3.875a1.942 1.942 0 0 0-1.942-1.942z"/>
+                                        <path d="M17.368 13.817v7.116m-3.551-3.55h7.116"/>
+                                    </g>
+                                </svg>
+                                dashboard
+                            </a>
+                            
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 group hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 svg-icon text-white group-hover:text-black" width="20" height="20" viewBox="0 0 512 512">
+                                    <path fill="currentColor" d="M160 368c26.5 0 48 21.5 48 48v16l72.5-54.4c8.3-6.2 18.4-9.6 28.8-9.6H448c8.8 0 16-7.2 16-16V64c0-8.8-7.2-16-16-16H64c-8.8 0-16 7.2-16 16v288c0 8.8 7.2 16 16 16zm48 124l-.2.2l-5.1 3.8l-17.1 12.8c-4.8 3.6-11.3 4.2-16.8 1.5s-8.8-8.2-8.8-14.3v-80H64c-35.3 0-64-28.7-64-64V64C0 28.7 28.7 0 64 0h384c35.3 0 64 28.7 64 64v288c0 35.3-28.7 64-64 64H309.3z"/>
+                                </svg>
+                                Messages
+                            </a>
+
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 group hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg"  class="mr-2 svg-icon text-white group-hover:text-black" width="28" height="28" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" d="M17.923 12.5v-1h3.23v1zm1.085 6.462l-2.585-1.939l.623-.792l2.585 1.938zm-2.039-11.27l-.623-.792l2.585-1.938l.623.792zM5.5 17.962v-3.808H2.846V9.846h5.346L12.154 7.5v9l-3.962-2.346H6.5v3.808zm5.654-3.243V9.281l-2.68 1.565H3.845v2.308h4.627zm2.77.17V9.111q.501.465.808 1.222q.306.756.306 1.666t-.306 1.666t-.809 1.222M7.5 12"/></svg>
+                                Campagnes
+                            </a>
+
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 group hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 svg-icon text-white group-hover:text-black " width="25" height="25" viewBox="0 0 24 24"><g fill="none" stroke="CurrentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"><path d="M3 15V9a6 6 0 0 1 6-6h6a6 6 0 0 1 6 6v6a6 6 0 0 1-6 6H9a6 6 0 0 1-6-6"/><path d="M15 3s-4.5 0-4.5 9H13c0 9 2 9 2 9"/><path d="M16.5 14.5s-1.5 2-4.5 2s-4.5-2-4.5-2M7 9v2m10-2v2"/></g></svg>
+                                Trouver un candidat
+                            </a>
+                            
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 group hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 svg-icon text-white group-hover:text-black" width="22" height="22" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" d="M20 7c1.25 1.67 2 3.75 2 6c0 5.52-4.48 10-10 10S2 18.52 2 13S6.48 3 12 3m0-2v12l9.6-7.2C19.41 2.89 15.92 1 12 1z"/></svg>
+                                Analytique
+                            </a>
+                            
+                            <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 group hover:bg-white hover:text-black hover:rounded-lg">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="mr-2 svg-icon text-white group-hover:text-black" width="22" height="22" viewBox="0 0 24 24"><path fill="white" stroke="currentColor" d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2m0 14H4v-6h16zm0-10H4V6h16z"/></svg>
+                                Payment
+                            </a>
+                            
+                            
+                            
+                        </div>
+                     
+                        <div class="container flex flex-col items-center justify-end w-[15vw] min-h-[30vh] p-5 mx-auto rounded-xl  bg-blue-500 space-y-5">
+                            <p class="text-white text-center text-xs leading-6 tracking-wider">Avez-vous des problèmes pour gérer votre tableau de bord ? <br> Essayez de contacter le support client.</p>
+                            <button type="submit" class=" shadow-sm bg-sky-400  text-white  text-sm font-medium w-40 tracking-wide h-11 rounded-lg hover:scale-105 duration-300 ease-in-out">
+                                Contact Us
+                            </button>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        
+            <!-- Main content -->
+            <div class="flex flex-col flex-1 overflow-y-auto ">
+                <div class="flex items-center justify-between h-24  bg-transparent">
+                    <div class="flex items-center px-4">
+                        <div class="px-4">
+                            <h1 class="text-2xl font-bold"> <span class="font-bold text-4xl tracking-wide "><%= user.nom_entreprise %></span> </h1>
+                        </div>
+                    </div>
+                    <div class="flex items-center pr-4">
+
+                        <!-- logout button -->
+                        <form action="dashboard/logout" method="post">
+                            <a href="" class="font-medium text-sm text-white mr-5">
+                                <button type="submit" class="border-2 shadow-sm border-blue-800 text-black font-medium w-32 h-10 rounded-lg hover:scale-105 duration-300 ease-in-out">
+                                déconnexion
+                                </button>
+                            </a>
+                        </form>
+                      
+                        <div class="container relative">
+                            <button class="flex justify-center items-center hover:scale-105 duration-150 ease-out shadow-md bg-white rounded-full w-10 h-10 focus:text-gray-700">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24"><path fill="blue" d="M4 8a8 8 0 1 1 16 0v4.697l2 3V20h-5.611a4.502 4.502 0 0 1-8.777 0H2v-4.303l2-3zm5.708 12a2.5 2.5 0 0 0 4.584 0zM12 2a6 6 0 0 0-6 6v5.303l-2 3V18h16v-1.697l-2-3V8a6 6 0 0 0-6-6"/></svg>
+                            </button>
+                            <div class="rounded-full w-5 h-5 flex items-center justify-center bg-blue-700 absolute top-[-6px] right-[-5.5px]">
+                                <p class="text-white text-[0.8em] text-center font-medium">2</p>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            
+                <div class="flex space-x-2 px-2 ml-8 items-center ">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="3.2em" height="3.2em" viewBox="0 0 512 512"><path fill="none" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48"/><path fill="black" d="M459.94 53.25a16.06 16.06 0 0 0-23.22-.56L424.35 65a8 8 0 0 0 0 11.31l11.34 11.32a8 8 0 0 0 11.34 0l12.06-12c6.1-6.09 6.67-16.01.85-22.38M399.34 90L218.82 270.2a9 9 0 0 0-2.31 3.93L208.16 299a3.91 3.91 0 0 0 4.86 4.86l24.85-8.35a9 9 0 0 0 3.93-2.31L422 112.66a9 9 0 0 0 0-12.66l-9.95-10a9 9 0 0 0-12.71 0"/></svg>
+                    <p class="text-black font-bold text-2xl tracking-wide">Create a new offer</p>
+                </div>
+
+                <section class="bg-gray-50 min-h-screen w-[70vw]  mx-auto mt-8 rounded-lg shadow-lg">
+                    <form action="/recruter/poster_offre" method="POST"></form>
+                </section>
+                
+            </div>
+            
+        </div>
+    </main>
+    
+    <!-- footer section -->
+    <%- include('../../components/footer') %>
+        
+</body>
+</html>
