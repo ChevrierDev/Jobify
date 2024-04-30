@@ -147,7 +147,7 @@ async function postNewOffer(req, res) {
         ]
       );
 
-      res.status(200).send("offer add with success").json(newPost.rows[0]);
+      res.redirect('/recruter/dashboard');
     }
   } catch (err) {
     console.log(err);

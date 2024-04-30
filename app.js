@@ -41,7 +41,7 @@ initializePassport(passport);
 
 const checkAuthenticated = (requiredRole) => (req, res, next) => {
   if (!req.isAuthenticated()) {
-    return res.redirect("/home");
+    return res.redirect("/login/recruter");
   }
   const userType = req.user.userType;
   if (userType !== requiredRole) {

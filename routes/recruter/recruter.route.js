@@ -22,7 +22,7 @@ recruterRoute.get("/poster_offre", checkAuthenticated('recruteur'), (req, res) =
 
 
 //recruter post new offer 
-recruterRoute.post('/poster_offre/poster', checkAuthenticated('recruteur'),  postNewOffer, (req, res) => {
+recruterRoute.post('/poster_offre', checkAuthenticated('recruteur'),  postNewOffer, (req, res) => {
   res.redirect('/dashboard/recruter')
 })
 
