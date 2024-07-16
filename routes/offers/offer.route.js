@@ -1,8 +1,8 @@
 const express = require("express");
-const renderOfferById = require("../../controllers/offer.controller");
+const { fetchofferData } = require("../../controllers/offer.controller");
 
 const offerRoute = express.Router();
 
-offerRoute.get("/:id", renderOfferById);
+offerRoute.get("/:id", fetchofferData);
 
 module.exports = offerRoute;

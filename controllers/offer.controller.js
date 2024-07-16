@@ -31,4 +31,4 @@ async function fetchofferData(req, res) {
   }
 }
 
-module.exports = fetchofferData;
+module.exports = {fetchofferData};
